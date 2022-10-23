@@ -3,7 +3,7 @@ import { listType } from '../../types'
 import NoLoggedComponent from '../NoLoggedComponent/NoLoggedComponent'
 import Avatar from '@mui/material/Avatar'
 import './perfil.css'
-import { apiBase, backgoundAppBar, colorBackGround, colorsLayout, initialsAvatar } from '../../utils'
+import { apiBase, colorBackGround, colorsLayout, initialsAvatar } from '../../utils'
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import EmailIcon from '@mui/icons-material/Email';
 import ApartmentIcon from '@mui/icons-material/Apartment';
@@ -19,16 +19,16 @@ export default function Perfil() {
 
     useEffect(() => {
         const formdata = new FormData()
-        formdata.append('email',user.email)
-        fetch(apiBase+'getUsuarioPorEmail',{
-          method:'post',
-          body:formdata
-        }).then(res=>res.json()).then(res=>{
-            setuserLoggedApi(res[0])
-        })
-    
-  
-    }, [])
+        if (user) {
+          formdata.append('email',user.email)
+          fetch(apiBase+'getUsuarioPorEmail',{
+            method:'post',
+            body:formdata
+          }).then(res=>res.json()).then(res=>{
+              setuserLoggedApi(res[0])
+          })
+        }
+    }, [user])
 
     const tamavatar = '180px'
     const dispatch = useDispatch()
