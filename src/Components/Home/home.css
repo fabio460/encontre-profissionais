@@ -1,0 +1,135 @@
+.home{
+    height: 100vh ;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding-top: 0px;
+}
+
+.homeMain{
+    height: calc(100vh - 80px);
+    display: flex;
+    
+}
+.AppBar{
+      
+   height: 50px;
+   padding: 20px 20px 10px 20px;
+}
+
+.homeLeft{
+   width: 600px;
+   margin: 20px 10px 20px 20px;
+}
+
+.homeRight{
+   width: 100%;
+   margin: 20px 20px 20px 10px;
+   border-radius: 5px;
+   background-color: white;
+   
+}
+.homeRightContainer{
+   
+}
+.TabPainel::-webkit-scrollbar{
+  width: 5px;
+}
+.TabPainel::-webkit-scrollbar-thumb{
+   background-color: aqua;
+}
+
+.ListItens{
+   /* cursor: pointer;
+   display:flex;
+   padding:10px;
+   background-color: rgba(0, 0, 0, 0.05);
+   border-radius:5px;
+   margin:10px 0px;
+   box-shadow:1px 1px 1px 0.2px black; */
+}
+.ListItens:hover{
+   background-color: rgba(0, 0, 0, 0.15);
+}
+.homeRightButtonReturn{
+   display: none;
+}
+.homeRightHeader{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+.homeRightAvatar{
+   margin-bottom: -50px;
+}
+.homeRightBody{
+   margin-top: 80px;
+   display: grid;
+   padding: 20px;
+   gap: 20px;
+   grid-template-columns: 1fr 1fr 1fr;
+}
+.homeRightItems{
+   min-height: 80px;
+   padding: 20px;
+   background-color: rgba(0, 0, 0, 0.05);
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   border-radius: 5px;
+}
+
+.homeRightEmpty{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 30px;
+}
+.homeLeftImgLogin{
+   width: 100%;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+}
+
+@media (max-width:750px) {
+   .homeRightBody{
+      grid-template-columns: 1fr;
+      
+   }
+   .AppBar{
+   
+      height: 50px;
+      padding: 0px;
+   }   
+    .homeLeft{
+       margin: 0;
+       top: 70px;
+       bottom: 0px;
+       background-color: white; 
+       position: absolute;
+       left:0%; 
+       padding:0px; 
+       width: 100%;
+       overflow-y: hidden;
+       transition: 0.2s;
+    }
+    .homeRight{
+      transition: 0.2s;
+      display: none;
+      margin: 10px;
+      overflow-y: scroll;
+    }
+
+    .rollHomeLeft{
+      left:-100%;
+      transition: 0.1s;
+    }
+    .rollHomeRight{
+      transition: 0.1s;
+      display: block;
+      min-height: 100%;
+    }
+    .homeRightButtonReturn{
+      display: block;
+    }
+}

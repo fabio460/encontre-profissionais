@@ -1,0 +1,22 @@
+.avatarPerfi{
+    display: flex;
+    justify-content: center;
+}
+.tituloPerfil{
+    text-align: center;
+    margin: 0;
+}
+.profissaoPerfil{
+    color: gray;
+    text-align: center;
+}
+.perfilItems{
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}   
+.buttonsPerfil{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
