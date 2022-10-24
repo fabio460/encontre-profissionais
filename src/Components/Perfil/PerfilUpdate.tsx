@@ -52,7 +52,7 @@ export default function PerfilUpdate() {
             setTelefone(res[0].telefone)
             setuserLoggedApi(res[0])
         })
-    }, [user])
+    }, [])
     
     const tamavatar = '180px'
 
@@ -109,7 +109,7 @@ export default function PerfilUpdate() {
     <div className='perfil'>
         
         {
-            userLogged?
+            userLogged?._id?
             <div>
               <div className='avatarPerfi'>
                 <Avatar 

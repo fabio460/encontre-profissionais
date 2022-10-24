@@ -13,6 +13,7 @@ import CallIcon from '@mui/icons-material/Call';
 import Diversity2 from '@mui/icons-material/Diversity2'
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux'
+import PerfilDelete from './PerfilDelete'
 export default function Perfil() {
     var user:listType = JSON.parse(localStorage.getItem('userLogged')||'null') 
     const [userLogged,setuserLoggedApi] = useState<listType>()
@@ -38,6 +39,8 @@ export default function Perfil() {
             payload:{btnUpdate:true}
         })
     }
+
+
   return (
 
     <div className='perfil'>
@@ -58,9 +61,7 @@ export default function Perfil() {
                 <Button onClick={update} variant="contained" color="primary" sx={{marginRight:'40px',borderRadius:'30px'}}>
                     atualizar
                 </Button>
-                <Button variant="outlined" color="error" sx={{borderRadius:'30px'}}>
-                    deletar conta
-                </Button>  
+                <PerfilDelete/>
               </div>  
 
               <div className='perfilItems' style={{background:colorBackGround}}>
