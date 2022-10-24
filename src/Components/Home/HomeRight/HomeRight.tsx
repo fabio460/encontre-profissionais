@@ -8,7 +8,7 @@ import { initialsAvatar } from '../../../utils'
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import Diversity2Icon from '@mui/icons-material/Diversity2';
-import PersonIcon from '@mui/icons-material/Person';
+  import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import EmailIcon from '@mui/icons-material/Email';

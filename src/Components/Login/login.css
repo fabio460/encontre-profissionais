@@ -1,5 +1,24 @@
 .loginBody{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background-image: url('https://dt2sdf0db8zob.cloudfront.net/wp-content/uploads/2022/09/WH-General2-850x446.jpg');
+    background-position: center;
+    background-size: contain;
+}
+.loginRight{
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    padding:  10% 5%;
+    backdrop-filter: blur(10px);
+    background-color: rgba(246, 246, 246, 0.7);
+    
+}
+.inputPassword{
+    display: flex;
+    align-items: center;
+    
+}
+.loginLeft{
+
+    height: 100vh;
 }
