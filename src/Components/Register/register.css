@@ -1,4 +1,4 @@
-.loginBody{
+.registerBody{
     display: grid;
     grid-template-columns: 3fr 2fr;
     background-image: url('https://dt2sdf0db8zob.cloudfront.net/wp-content/uploads/2022/09/WH-General2-850x446.jpg');
@@ -6,7 +6,7 @@
     background-size: contain;
     height: 100vh;
 }
-.loginRight{
+.registerRight{
     display: flex;
     flex-direction: column;
     padding:  10% 5%;
@@ -14,30 +14,29 @@
     background-color: rgba(246, 246, 246, 0.7);
     
 }
-.inputPassword{
+.forms{
     display: flex;
-    align-items: center;
-    
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
-.loginLeft{
-    height: 100vh;
-}
-.textToRegistro{
-   cursor: pointer;
-}
-.textToRegistro:hover{
-    color: red;
+.formsHeader{
+    margin-bottom: 25px;
 }
 @media (max-width:750px) {
-    .loginBody{
-        grid-template-columns:1fr;
+    .registerBody{
+        grid-template-columns: 1fr;
     }
-    .loginLeft{
+    .registerleft{
         display: none;
-
     }
-    .loginRight{
-      border-radius: 5px;
-      margin: 5%;  
+    .registerRight{
+        border-radius: 5px;
+        margin: 5%;  
+    }
+    .styleStepHeader{
+        font-size: 10px;
+        
+        margin-left: -3px;
     }
 }

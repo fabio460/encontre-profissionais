@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {
     BrowserRouter,
     Route,
@@ -6,14 +7,15 @@ import {
  } from 'react-router-dom'
  import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
 
-import Sobre from './Components/Sobre/Sobre';
 export default function App() {
   return (
     <BrowserRouter>
     <Routes>
        <Route path='/' element={<Home/>} />
        <Route path='/login' element={<Login/>} />
+       <Route path='/register' element={<Register/>}/>
     </Routes>
  </BrowserRouter>
   )

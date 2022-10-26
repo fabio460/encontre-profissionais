@@ -33,6 +33,7 @@ export default function HomeRight() {
   const users = useSelector<any,listType>(state=>state.FunctionsRedcer.getUsuariosReducer)
   const tamAvatar = "150px"
   const tamAvatar2 = "100px"
+
   return (
     <div>
       <div className='homeRightButtonReturn'>
@@ -100,8 +101,9 @@ export default function HomeRight() {
          </div>
          :
          <div className='homeRightEmpty'>
-            <h1>Selecione um profissional</h1>
+            <h1>Nenhum profissional selecionado!</h1>
             <img src={imagemUsers}/>
+   
          </div>
       }
       

@@ -91,6 +91,9 @@
    flex-direction: column;
 }
 
+.roll2{
+   right: -600px;
+}
 @media (max-width:750px) {
    .homeRightBody{
       grid-template-columns: 1fr;

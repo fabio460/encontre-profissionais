@@ -34,30 +34,24 @@ export default function Login() {
       seterror(true)
       setloading(false)
     })
-
   }
   return (
     <div className='loginBody'>
-       <div className='loginLeft'>
-          
-       </div>
+       <div className='loginLeft'></div>
        <div className='loginRight'>
           <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
-           
-              <img width={'150px'} height='150px' src='https://ksarquitetos.com.br/wp-content/uploads/2014/12/user.png'/>
-        
-            {/* <PersonIcon sx={{width:'70px',height:'70px'}}/> */}
+            <img width={'150px'} height='150px' src='https://ksarquitetos.com.br/wp-content/uploads/2014/12/user.png'/>
             <h1>Login</h1>
           </div>
           <TextField
-            id="outlined-basic" 
-            label="email"
-            variant="outlined"
-            onChange={e=>setEmail(e.target.value)}
-            type='email'
-            sx={{margin:'10px opx',color:'white'}} 
-            error={error}
-            size='small'
+              id="outlined-basic" 
+              label="email"
+              variant="outlined"
+              onChange={e=>setEmail(e.target.value)}
+              type='email'
+              sx={{margin:'10px opx',color:'white'}} 
+              error={error}
+              size='small'
             />
            
             <div className='inputPassword'>
@@ -77,6 +71,9 @@ export default function Login() {
             {error&&
               <div style={{color:'red',margin:'0px 10px'}}>usuario ou senha inválidos</div>
             }
+          <div style={{margin:'10px 0px'}}>
+            Não é cadastrado? <span className='textToRegistro' onClick={()=>navigate('/register')}>resgistre-se aqui</span>
+          </div>
           <Button 
               variant='contained' 
               onClick={logar} 
