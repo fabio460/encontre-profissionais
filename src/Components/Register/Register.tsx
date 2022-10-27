@@ -5,9 +5,10 @@ import FormEndereco from './Forms/FormEndereco';
 import FormFinal from './Forms/FormFinal';
 import FormHeader from './FormHeader';
 import { apiBase } from '../../utils';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
-
+    const navigate = useNavigate()
     const [CepInvalid, setCepInvalid] = useState<boolean>(true)
 
     const [Nome, setNome] = useState<string>('')
@@ -29,16 +30,36 @@ export default function Register() {
     const [ObservacoesFinais, setObservacoesFinais] = useState<string>('')
     
     const cadastrar = async()=>{
-        const formdata = new FormData()
-        formdata.append('email',Email)
+        const formdataEmail = new FormData()
+        formdataEmail.append('email',Email)
         const usuarioExistente =await fetch(apiBase+'getUsuarioPorEmail',{
             method:'post',
-            body:formdata
+            body:formdataEmail
         }).then(res=>res.json()).catch(res=> null)
         if (usuarioExistente[0]) {
-            console.log('ja existe este usuario')
+            alert('ja existe este usuario')
         }else{
-            console.log('usuario cadastrado com sucessos')
+            const formdata = new FormData()
+            formdata.append('email',Email)
+            formdata.append('nome',Nome)
+            formdata.append('senha',Senha)
+            formdata.append('estado',Estado)
+            formdata.append('cidade',Cidade)
+            formdata.append('bairro',Bairro)
+            formdata.append('rua',Rua)
+            formdata.append('complemento',Complemento)
+            formdata.append('profissao',Profissao)
+            formdata.append('observacoesFinais',ObservacoesFinais)
+            formdata.append('outrasHabilidades',OutrasHabilidades)
+            fetch(apiBase+'setUsuario',{
+               method:'post',
+               body:formdata
+            }).then(res=>{
+                alert(`usuário(a) ${Nome} cadastrado(a) com sucesso`)
+                navigate('/login')
+            }).catch(res=>{alert('falha ao cadastrar, motivo: '+res)})
+            
+        
         }
        
         
@@ -88,7 +109,9 @@ export default function Register() {
                     </div>
                    
                     <div style={{display:'flex',justifyContent:'space-between'}}>
-                        <div></div>
+                        <div>
+                            <button onClick={()=>navigate('/login')}>Login</button>
+                        </div>
                         <button onClick={()=>{
                             if (Nome !== '') {
                                if (Email !== '') {
@@ -165,7 +188,7 @@ export default function Register() {
                             <button onClick={()=>{
                                 if (Profissao !== '') {
                                     cadastrar()
-                                    setKey(1) 
+                                    
                                 }else{
                                     alert('campo profissão é obrigatório')
                                 }

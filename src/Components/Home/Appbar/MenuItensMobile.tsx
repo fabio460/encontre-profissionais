@@ -14,6 +14,7 @@ import Logout from '@mui/icons-material/Logout';
 import AppBarInputSearch from './AppBarInputSearch';
 import { listType } from '../../../types';
 import { colorsLayout, initialsAvatar } from '../../../utils';
+import { useNavigate } from 'react-router-dom';
 
 export default function MenuItensMobile() {
   var userLogged:listType = JSON.parse(localStorage.getItem('userLogged')||'null')   
@@ -29,6 +30,11 @@ export default function MenuItensMobile() {
     localStorage.removeItem('userLogged')
     window.location.reload()
   }
+  const navigate = useNavigate()
+  const logar = ()=>{
+    navigate('/login')
+  }
+
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -103,12 +109,21 @@ export default function MenuItensMobile() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={deslogar}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
+
+        {!localStorage.getItem('userLogged')?
+          <MenuItem onClick={logar}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            logar
+          </MenuItem>:
+            <MenuItem onClick={deslogar}>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              deslogar
+            </MenuItem>
+        }
    
       </Menu>
     </React.Fragment>

@@ -38,7 +38,7 @@ export default function FormFinal({
             label="OutrasHabilidades"
             variant="outlined"
             onChange={e=>setOutrasHabilidades(e.target.value)}
-            type='email'
+            type='text'
             sx={{margin:'5px 0px',color:'white',width:'100%'}} 
             size='small'
         />
@@ -49,7 +49,7 @@ export default function FormFinal({
             label="Observacôes finais"
             variant="outlined"
             onChange={(e)=>setObservacoesFinais(e.target.value)}
-            type='password'
+            type='text'
             sx={{margin:'5px 0px',color:'white',width:'100%'}} 
             size='small'
         />
