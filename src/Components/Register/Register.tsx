@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react'
+import Button from '@mui/material/Button';
 import "./register.css";
 import FormDadosPessoais from './Forms/FormDadosPessoais';
 import FormEndereco from './Forms/FormEndereco';
@@ -110,9 +111,9 @@ export default function Register() {
                    
                     <div style={{display:'flex',justifyContent:'space-between'}}>
                         <div>
-                            <button onClick={()=>navigate('/login')}>Login</button>
+                            <Button variant="outlined" onClick={()=>navigate('/login')}>Login</Button>
                         </div>
-                        <button onClick={()=>{
+                        <Button variant="outlined" onClick={()=>{
                             if (Nome !== '') {
                                if (Email !== '') {
                                  if (Senha !== '' && ConfirSenha !== '') {
@@ -131,7 +132,7 @@ export default function Register() {
                                 alert('nome nulo')
                             }
                             }}>proximo
-                        </button>
+                        </Button>
                     </div>
                   </div>:
                   key === 2  ?
@@ -157,8 +158,8 @@ export default function Register() {
                             />
                         </div>
                         <div style={{display:'flex',justifyContent:'space-between'}}>
-                            <button onClick={()=>setKey(1)}>voltar</button>
-                            <button onClick={()=>{
+                            <Button variant="outlined" onClick={()=>setKey(1)}>voltar</Button>
+                            <Button variant="outlined" onClick={()=>{
                                 
                                 setTimeout(() => {
                                     if (Cep !== '' &&  !CepInvalid ){
@@ -168,7 +169,7 @@ export default function Register() {
                                     }
                                 }, 200);
                                 }}>proximo
-                            </button>
+                            </Button>
                         </div>
                     </div>:
                     <div className='forms'>
@@ -184,8 +185,8 @@ export default function Register() {
                             />
                         </div>
                         <div style={{display:'flex',justifyContent:'space-between'}}>
-                            <button onClick={()=> setKey(2)}>voltar</button>
-                            <button onClick={()=>{
+                            <Button variant="outlined" onClick={()=> setKey(2)}>voltar</Button>
+                            <Button variant="outlined" onClick={()=>{
                                 if (Profissao !== '') {
                                     cadastrar()
                                     
@@ -193,7 +194,7 @@ export default function Register() {
                                     alert('campo profissão é obrigatório')
                                 }
                                 }}>Cadastrar
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 }

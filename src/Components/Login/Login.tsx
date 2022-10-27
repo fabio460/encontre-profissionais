@@ -39,6 +39,9 @@ export default function Login() {
     <div className='loginBody'>
        <div className='loginLeft'></div>
        <div className='loginRight'>
+          <div>
+            <Button onClick={()=> navigate('/')}>home</Button>
+          </div>
           <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
             <img width={'150px'} height='150px' src='https://ksarquitetos.com.br/wp-content/uploads/2014/12/user.png'/>
             <h1>Login</h1>
