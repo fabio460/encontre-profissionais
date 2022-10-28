@@ -5,6 +5,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { listType } from '../../types';
+import { apiBase, getReferenciaImageFireSorage } from '../../utils';
+import { deleteObject, getStorage, ref } from 'firebase/storage';
 
 export default function PerfilDelete() {
   const [open, setOpen] = React.useState(false);
@@ -17,13 +20,45 @@ export default function PerfilDelete() {
     setOpen(false);
   };
 
+  var user:listType = JSON.parse(localStorage.getItem('userLogged')||'null') 
   const deleteUser = ()=>{
-    alert('falta implementar')
-    handleClose()
+    
+
+    
+     try {
+      const formdata = new FormData()
+      formdata.append('id',user._id)
+      fetch(apiBase+'removerConta',{
+        method:'delete',
+        body:formdata
+      }).then(res=>{
+         alert('usuario deletado com sucesso')
+      })
+
+           let r = getReferenciaImageFireSorage(user.imagemPerfil) || null
+           if (r) {
+            console.log(r)
+            const desertRef = ref(getStorage(),r);
+            deleteObject(desertRef).then(() => {
+                console.log('deletada a ref '+r)
+   
+              }).catch((error) => {
+                console.log(error)
+              });
+           }
+
+           localStorage.removeItem('userLogged')
+           setTimeout(() => {
+      
+            window.location.reload()     
+           }, 1000);
+     } catch (error) {
+       alert(error)
+     }    
   }
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen} color='error' sx={{marginRight:'40px',borderRadius:'30px'}}>
+      <Button variant="outlined" onClick={handleClickOpen} color='error' sx={{borderRadius:'30px'}}>
         deletar
       </Button>
       <Dialog

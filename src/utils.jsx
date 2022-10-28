@@ -17,3 +17,9 @@ export function ramdomColors() {
     let color = ['#1976d2','#9c27b0','#d32f2f','#ed6c02','#2e7d32','#91ff35','#ffea00']
     return color[Math.ceil(Math.random()*color.length-1)]
 }
+
+export var getReferenciaImageFireSorage=(image)=>{
+    if (image) {
+      return  image.split('?')[0].split('/')[7]
+    }
+}

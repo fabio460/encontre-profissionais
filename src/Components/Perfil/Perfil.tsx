@@ -58,7 +58,7 @@ export default function Perfil() {
               <div className='profissaoPerfil'>{userLogged.profissao}</div>
 
               <div className='buttonsPerfil'>
-                <Button onClick={update} variant="contained" color="primary" sx={{marginRight:'40px',borderRadius:'30px'}}>
+                <Button onClick={update} variant="contained" color="primary" sx={{borderRadius:'30px'}}>
                     atualizar
                 </Button>
                 <PerfilDelete/>

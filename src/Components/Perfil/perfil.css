@@ -17,6 +17,12 @@
 }   
 .buttonsPerfil{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     padding: 20px;
+}
+.textoMensagemDeFundoAvatarAtualizar{
+    position: absolute;
+    z-index: 1;
+    color: gray;
+    font-size: 15px;
 }

@@ -12,6 +12,7 @@ export default function Register() {
     const navigate = useNavigate()
     const [CepInvalid, setCepInvalid] = useState<boolean>(true)
 
+    const [ImagemPerfil, setImagemPerfil] = useState<string>('')
     const [Nome, setNome] = useState<string>('')
     const [Email, setEmail] = useState<string>('')
     const [Senha, setSenha] = useState<string>('')
@@ -41,6 +42,7 @@ export default function Register() {
             alert('ja existe este usuario')
         }else{
             const formdata = new FormData()
+            formdata.append('imagemPerfil',ImagemPerfil)
             formdata.append('email',Email)
             formdata.append('nome',Nome)
             formdata.append('senha',Senha)
