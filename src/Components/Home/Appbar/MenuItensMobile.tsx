@@ -15,6 +15,7 @@ import AppBarInputSearch from './AppBarInputSearch';
 import { listType } from '../../../types';
 import { apiBase, colorsLayout, initialsAvatar } from '../../../utils';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 export default function MenuItensMobile() {
   var userLogged:listType = JSON.parse(localStorage.getItem('userLogged')||'null')   
@@ -51,7 +52,18 @@ export default function MenuItensMobile() {
       setUserLoggedApi(res[0])
     })
   }
-
+  const dispatch = useDispatch()
+  const getIdUsers = ()=>{
+      dispatch({
+        type:'functions',
+        payload:{
+          getUsuariosReducer:userLogged,
+          toRoll:true,
+          index:0        
+        }
+      })
+      handleClose()
+  }
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -110,9 +122,9 @@ export default function MenuItensMobile() {
             </Avatar>
             {userLogged ?  UserLoggedApi?.nome : "Usuario"}
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
-        </MenuItem>
+        {userLogged && <MenuItem onClick={getIdUsers}>
+          <Avatar /> Minha conta
+        </MenuItem>}
         <Divider />
         <MenuItem>
           <ListItemIcon>

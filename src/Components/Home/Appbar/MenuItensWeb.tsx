@@ -14,6 +14,7 @@ import Logout from '@mui/icons-material/Logout';
 import {  useNavigate } from 'react-router-dom';
 import { apiBase, colorsLayout, initialsAvatar } from '../../../utils';
 import { listType } from '../../../types';
+import { useDispatch } from 'react-redux';
 
 export default function MenuItensWeb() {
   interface typeLocalStotage{
@@ -52,6 +53,18 @@ export default function MenuItensWeb() {
     .then(res=>{
       setUserLoggedApi(res[0])
     })
+  }
+
+  const dispatch = useDispatch()
+  const getIdUsers = ()=>{
+      dispatch({
+        type:'functions',
+        payload:{
+          getUsuariosReducer:userLogged,
+          toRoll:true,
+          index:0        
+        }
+      })
   }
   return (
     <React.Fragment>
@@ -114,9 +127,9 @@ export default function MenuItensWeb() {
             </Avatar>
             {userLogged ?  UserLoggedApi?.nome : "Usuario"}
         </MenuItem>
-        <MenuItem>
-          <Avatar /> My account
-        </MenuItem>
+        {userLogged && <MenuItem onClick={getIdUsers}>
+          <Avatar /> Minha conta
+        </MenuItem>}
         <Divider />
         <MenuItem>
           <ListItemIcon>
