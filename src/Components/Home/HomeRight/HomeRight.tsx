@@ -1,14 +1,15 @@
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import React from 'react'
+import React,{useState} from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import { listType } from '../../../types'
 import { colorsLayout, colorTextAbbBar } from '../../../utils'
 import { initialsAvatar } from '../../../utils'
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import ChatIcon from '@mui/icons-material/Chat';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import Diversity2Icon from '@mui/icons-material/Diversity2';
-  import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import EmailIcon from '@mui/icons-material/Email';
@@ -18,6 +19,8 @@ import StreetviewIcon from '@mui/icons-material/Streetview';
 import CallIcon from '@mui/icons-material/Call';
 import Diversity2 from '@mui/icons-material/Diversity2'
 import imagemUsers from '../../../images/users2.png'
+import Fab from '@mui/material/Fab';
+import Chat from './Chat'
 export default function HomeRight() {
   const dispatch = useDispatch()
 
@@ -34,13 +37,22 @@ export default function HomeRight() {
   const tamAvatar = "150px"
   const tamAvatar2 = "100px"
 
+  const [VisibleChat, setVisibleChat] = useState(false)
+  const handleVisibleChat = ()=>{
+    setVisibleChat(!VisibleChat)
+  }
+
+  const handleCloseChat = ()=>{
+    //setVisibleChat(false)
+    
+  }
   return (
     <div>
       <div className='homeRightButtonReturn'>
         <Button onClick={voltar} >voltar</Button>
       </div>
       { users._id ?  
-         <div className='homeRightContainer'>
+         <div className='homeRightContainer' >
             <div className='homeRightHeader' style={{background:colorsLayout,color:colorTextAbbBar}}>
               <h1 className='homeRightTitle'>{users.nome}</h1>
               <div className='homeRightAvatar'>
@@ -97,6 +109,13 @@ export default function HomeRight() {
                         </div>
                     }
               </div>
+            </div>
+            <div className='chatContainer' >
+              <div className='chatBtn'>
+                <Fab color='primary' onClick={handleVisibleChat}><ChatIcon/></Fab>
+              </div>
+              <div className={VisibleChat ? 'chat visibleChat' : 'chat'}><Chat/></div>
+             
             </div>
          </div>
          :

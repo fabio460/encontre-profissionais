@@ -1,0 +1,30 @@
+.chat{
+    position: fixed;
+    background-color: white;
+    box-shadow: 2px 2px 5px  black;
+    right: -100%;
+    bottom: 10%;
+    height: 400px;
+    width: 270px;
+    border-radius: 5px;
+    transition: 0.2s;
+    padding: 1%;
+}
+.chatBtn{
+    position: fixed;
+    right: 2%;
+    bottom: 5%;
+    z-index: 2;
+}
+.visibleChat{
+    right: 6%;
+}
+@media (max-width:700px) {
+    .visibleChat{
+        width: 80%;
+        right: 10%;
+    }
+    .chatBtn{
+        bottom: 3%;
+    }
+}
