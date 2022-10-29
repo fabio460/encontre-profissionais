@@ -118,16 +118,11 @@ export default function PerfilUpdate() {
                                 formdata.append('outrasHabilidades',OutrasHabilidades)
                                 formdata.append('observacoesFinais',ObservacoesFinais)
                                 if(Nome !== '' && Email !== '' ){
-
-                                    
                                     fetch(apiBase+'updateUsuario',{
                                         method:'put',
                                         body:formdata
                                     })
-                                    
                                     let r = getReferenciaImageFireSorage(ImagemPerfil) || null
-                                   
-                                   
                                     if (r) {
                                         console.log(r)
                                         const desertRef = ref(storage,r);
@@ -190,9 +185,8 @@ export default function PerfilUpdate() {
                            onChange={(e:any)=>setFileImagemPerfil(e.target.files[0])}
                         />
                         <div className='textoMensagemDeFundoAvatarAtualizar'>
-                           
-                           <div> Alterar imagem</div>
-                           <CameraAltIcon/>
+                            <div> Alterar imagem</div>
+                            <CameraAltIcon/>
                         </div>
                         <Avatar 
                             src={SrcImagemPerfil === '' ? ImagemPerfil : SrcImagemPerfil}

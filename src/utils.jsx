@@ -9,8 +9,11 @@ export const getUsuarios =apiBase + 'getusuarios'
 
 
 export function initialsAvatar(name) {
-    let aux = name.split('')
-    return aux[0].toUpperCase()
+    if(name){
+        let aux = name.split('')
+        return aux[0].toUpperCase()
+    }
+
 }
 
 export function ramdomColors() {

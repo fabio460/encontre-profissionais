@@ -12,7 +12,7 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import {  useNavigate } from 'react-router-dom';
-import { colorsLayout, initialsAvatar } from '../../../utils';
+import { apiBase, colorsLayout, initialsAvatar } from '../../../utils';
 import { listType } from '../../../types';
 
 export default function MenuItensWeb() {
@@ -36,6 +36,23 @@ export default function MenuItensWeb() {
     localStorage.removeItem('userLogged')
     window.location.reload()
   }
+
+  const [UserLoggedApi, setUserLoggedApi] = React.useState({
+    nome:'',
+    imagemPerfil:''
+  })
+  if (userLogged) {
+    const formdata = new FormData()
+    formdata.append('email',userLogged.email)
+    fetch(apiBase+'getUsuarioPorEmail',{
+      method:'post',
+      body:formdata
+    })
+    .then(res=>res.json())
+    .then(res=>{
+      setUserLoggedApi(res[0])
+    })
+  }
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -50,8 +67,8 @@ export default function MenuItensWeb() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar src={userLogged?.imagemPerfil} sx={{ width: 40, height: 40,bgcolor:colorsLayout  }}>
-              {userLogged &&initialsAvatar(userLogged.nome)}
+            <Avatar src={UserLoggedApi?.imagemPerfil} sx={{ width: 40, height: 40,bgcolor:colorsLayout  }}>
+              {UserLoggedApi &&initialsAvatar(UserLoggedApi?.nome)}
             </Avatar>
           </IconButton>
         </Tooltip>
@@ -93,9 +110,9 @@ export default function MenuItensWeb() {
       >
         <MenuItem>
             <Avatar src={userLogged?.imagemPerfil} sx={{ width: 40, height: 40}}>
-              {userLogged?._id && initialsAvatar(userLogged.nome)}
+              {UserLoggedApi && initialsAvatar(UserLoggedApi?.nome)}
             </Avatar>
-            {userLogged ?  userLogged?.nome : "Usuario"}
+            {userLogged ?  UserLoggedApi?.nome : "Usuario"}
         </MenuItem>
         <MenuItem>
           <Avatar /> My account

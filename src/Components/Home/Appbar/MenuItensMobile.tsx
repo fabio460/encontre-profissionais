@@ -13,7 +13,7 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import AppBarInputSearch from './AppBarInputSearch';
 import { listType } from '../../../types';
-import { colorsLayout, initialsAvatar } from '../../../utils';
+import { apiBase, colorsLayout, initialsAvatar } from '../../../utils';
 import { useNavigate } from 'react-router-dom';
 
 export default function MenuItensMobile() {
@@ -33,6 +33,23 @@ export default function MenuItensMobile() {
   const navigate = useNavigate()
   const logar = ()=>{
     navigate('/login')
+  }
+
+  const [UserLoggedApi, setUserLoggedApi] = React.useState({
+    nome:'',
+    imagemPerfil:''
+  })
+  if (userLogged) {
+    const formdata = new FormData()
+    formdata.append('email',userLogged.email)
+    fetch(apiBase+'getUsuarioPorEmail',{
+      method:'post',
+      body:formdata
+    })
+    .then(res=>res.json())
+    .then(res=>{
+      setUserLoggedApi(res[0])
+    })
   }
 
   return (
@@ -88,10 +105,10 @@ export default function MenuItensMobile() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleClose}>
-            <Avatar src={userLogged?.imagemPerfil} sx={{ width: 40, height: 40,bgcolor:colorsLayout  }}>
-              {userLogged && initialsAvatar(userLogged.nome)}
+            <Avatar src={UserLoggedApi?.imagemPerfil} sx={{ width: 40, height: 40,bgcolor:colorsLayout  }}>
+              {userLogged && initialsAvatar(UserLoggedApi.nome)}
             </Avatar>
-            {userLogged ?  userLogged?.nome : "Usuario"}
+            {userLogged ?  UserLoggedApi?.nome : "Usuario"}
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Avatar /> My account

@@ -27,7 +27,7 @@ export default function ListItens({elem,index}:PropsType) {
   
   return(
     <ListItemButton selected={selectIndex === index && true} onClick={getIdUsers} className='ListItens' id={index.toString()}>
-      <Avatar sx={{bgcolor:ramdomColors(),marginRight:'10px'}} >{initialsAvatar(elem.nome)}</Avatar>
+      <Avatar src={elem.imagemPerfil} sx={{bgcolor:ramdomColors(),marginRight:'10px'}} >{initialsAvatar(elem.nome)}</Avatar>
       <div>
          <div>{elem.nome}</div>
          <div style={{color:'grey',fontSize:'13px'}}>{elem.profissao}</div>
