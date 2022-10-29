@@ -24,34 +24,41 @@ export default function PerfilDelete() {
   const deleteUser = ()=>{
     
 
-    
+    <div className=""></div>
      try {
-      const formdata = new FormData()
-      formdata.append('id',user._id)
-      fetch(apiBase+'removerConta',{
-        method:'delete',
-        body:formdata
-      }).then(res=>{
-         alert('usuario deletado com sucesso')
-      })
-
-           let r = getReferenciaImageFireSorage(user.imagemPerfil) || null
-           if (r) {
+          const formdata = new FormData()
+          formdata.append('email',user.email)
+          fetch(apiBase+'getUsuarioPorEmail',{
+            method:'post',
+            body:formdata
+          })
+          .then(res=>res.json())
+          .then((res:any)=>{
+            let r = getReferenciaImageFireSorage(res[0].imagemPerfil) || null
+            console.log(r)
+            if (r) {
             console.log(r)
             const desertRef = ref(getStorage(),r);
             deleteObject(desertRef).then(() => {
                 console.log('deletada a ref '+r)
-   
+
               }).catch((error) => {
                 console.log(error)
               });
-           }
+            }
+          })
+          formdata.append('id',user._id)
+          fetch(apiBase+'removerConta',{
+            method:'delete',
+            body:formdata
+          }).then(res=>{
+            alert('usuario deletado com sucesso')
+          })
 
-           localStorage.removeItem('userLogged')
-           setTimeout(() => {
-      
-            window.location.reload()     
-           }, 1000);
+          localStorage.removeItem('userLogged')
+          setTimeout(() => {
+             window.location.reload()     
+          }, 1000);
      } catch (error) {
        alert(error)
      }    

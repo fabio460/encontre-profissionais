@@ -44,8 +44,6 @@ export default function PerfilUpdate() {
     const [SrcImagemPerfil, setSrcImagemPerfil] = useState('')
     const [User, setUser] = useState(null)
     useEffect(() => {
-
-
         // carregando os dados do usuario antes de atualizar
         if(fileImagemPerfil){
             setSrcImagemPerfil(URL.createObjectURL(fileImagemPerfil))
