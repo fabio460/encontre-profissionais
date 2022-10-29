@@ -14,13 +14,21 @@ export default function UsersList() {
     useEffect(() => {
       fetch(getUsuarios)
       .then(res=>res.json())
+  
       .then(res=>{
-          let aux = res.filter((elem:listType)=>{
+        let aux = []
+        if (userLogged) {
+          aux = res.filter((elem:listType)=>{
             if(elem.email !== userLogged.email){
               return res
             }
           })
-          setlist(aux.reverse())
+          setlist(aux.reverse())        
+        }else{
+          setlist(res.reverse())
+        }
+
+          
           setLoading(false)
       })
     
