@@ -15,8 +15,12 @@ export default function UsersList() {
       fetch(getUsuarios)
       .then(res=>res.json())
       .then(res=>{
-          
-          setlist(res)
+          let aux = res.filter((elem:listType)=>{
+            if(elem.email !== userLogged.email){
+              return res
+            }
+          })
+          setlist(aux.reverse())
           setLoading(false)
       })
     

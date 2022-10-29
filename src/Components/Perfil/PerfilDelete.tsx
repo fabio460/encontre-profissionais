@@ -75,18 +75,17 @@ export default function PerfilDelete() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Você esta prestes a deletar sua conta"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
+           Deseja realmente deletar sua conta? Se clicar em confirmar, não sera mais possível reverter 
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>voltar</Button>
-          <Button onClick={deleteUser} autoFocus>
-            deletar
+          <Button color='error' onClick={deleteUser} autoFocus>
+            confirmar
           </Button>
         </DialogActions>
       </Dialog>

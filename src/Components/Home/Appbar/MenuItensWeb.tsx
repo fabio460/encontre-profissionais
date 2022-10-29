@@ -109,7 +109,7 @@ export default function MenuItensWeb() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem>
-            <Avatar src={userLogged?.imagemPerfil} sx={{ width: 40, height: 40}}>
+            <Avatar src={UserLoggedApi?.imagemPerfil} sx={{ width: 40, height: 40}}>
               {UserLoggedApi && initialsAvatar(UserLoggedApi?.nome)}
             </Avatar>
             {userLogged ?  UserLoggedApi?.nome : "Usuario"}

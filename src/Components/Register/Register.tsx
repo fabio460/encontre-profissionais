@@ -7,12 +7,16 @@ import FormFinal from './Forms/FormFinal';
 import FormHeader from './FormHeader';
 import { apiBase } from '../../utils';
 import { useNavigate } from 'react-router-dom';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '../../firebaseConfig';
 
 export default function Register() {
+    initializeApp(firebaseConfig);
     const navigate = useNavigate()
     const [CepInvalid, setCepInvalid] = useState<boolean>(true)
 
-    const [ImagemPerfil, setImagemPerfil] = useState<string>('')
+    const [ImagemPerfil, setImagemPerfil] = useState(null)
     const [Nome, setNome] = useState<string>('')
     const [Email, setEmail] = useState<string>('')
     const [Senha, setSenha] = useState<string>('')
@@ -30,7 +34,17 @@ export default function Register() {
     const [Profissao, setProfissao] = useState<string>('')
     const [OutrasHabilidades, setOutrasHabilidades] = useState<string>('')
     const [ObservacoesFinais, setObservacoesFinais] = useState<string>('')
-    
+    const [urlImagemPerfil, setUrlImagemPerfil] = useState('')
+    function RamdomString() {
+        let chars = 'abcdefghijlmnopqrstuvxz'
+        let arrChars = chars.split('')
+        let ramdom = ''
+        arrChars.forEach(() => {
+          ramdom += chars[Math.ceil(Math.random()*(arrChars.length-1))]
+        });
+         
+        return ramdom.toString()
+      }
     const cadastrar = async()=>{
         const formdataEmail = new FormData()
         formdataEmail.append('email',Email)
@@ -41,28 +55,58 @@ export default function Register() {
         if (usuarioExistente[0]) {
             alert('ja existe este usuario')
         }else{
+
+            let ramdomStringName = RamdomString()
             const formdata = new FormData()
-            formdata.append('imagemPerfil',ImagemPerfil)
-            formdata.append('email',Email)
-            formdata.append('nome',Nome)
-            formdata.append('senha',Senha)
-            formdata.append('estado',Estado)
-            formdata.append('cidade',Cidade)
-            formdata.append('bairro',Bairro)
-            formdata.append('rua',Rua)
-            formdata.append('complemento',Complemento)
-            formdata.append('profissao',Profissao)
-            formdata.append('observacoesFinais',ObservacoesFinais)
-            formdata.append('outrasHabilidades',OutrasHabilidades)
-            fetch(apiBase+'setUsuario',{
-               method:'post',
-               body:formdata
-            }).then(res=>{
-                alert(`usuário(a) ${Nome} cadastrado(a) com sucesso`)
-                navigate('/login')
-            }).catch(res=>{alert('falha ao cadastrar, motivo: '+res)})
-            
-        
+            if (ImagemPerfil) {
+                const storage = getStorage();
+                const storageRef = ref(storage, ramdomStringName);
+                
+                // 'file' comes from the Blob or File API
+                uploadBytes(storageRef, ImagemPerfil).then((snapshot) => {
+                  getDownloadURL(storageRef).then(url=>{
+                    formdata.append('imagemPerfil',url)
+                    formdata.append('email',Email)
+                    formdata.append('nome',Nome)
+                    formdata.append('senha',Senha)
+                    formdata.append('estado',Estado)
+                    formdata.append('cidade',Cidade)
+                    formdata.append('bairro',Bairro)
+                    formdata.append('rua',Rua)
+                    formdata.append('complemento',Complemento)
+                    formdata.append('profissao',Profissao)
+                    formdata.append('observacoesFinais',ObservacoesFinais)
+                    formdata.append('outrasHabilidades',OutrasHabilidades)
+                    fetch(apiBase+'setUsuario',{
+                       method:'post',
+                       body:formdata
+                    }).then(res=>{
+                        alert(`usuário(a) ${Nome} cadastrado(a) com sucesso`)
+                        navigate('/login')
+                    }).catch(res=>{alert('falha ao cadastrar, motivo: '+res)})
+                  })
+                });
+            }else{
+                formdata.append('imagemPerfil','')
+                formdata.append('email',Email)
+                formdata.append('nome',Nome)
+                formdata.append('senha',Senha)
+                formdata.append('estado',Estado)
+                formdata.append('cidade',Cidade)
+                formdata.append('bairro',Bairro)
+                formdata.append('rua',Rua)
+                formdata.append('complemento',Complemento)
+                formdata.append('profissao',Profissao)
+                formdata.append('observacoesFinais',ObservacoesFinais)
+                formdata.append('outrasHabilidades',OutrasHabilidades)
+                fetch(apiBase+'setUsuario',{
+                   method:'post',
+                   body:formdata
+                }).then(res=>{
+                    alert(`usuário(a) ${Nome} cadastrado(a) com sucesso`)
+                    navigate('/login')
+                }).catch(res=>{alert('falha ao cadastrar, motivo: '+res)})
+            }            
         }
        
         
@@ -108,6 +152,8 @@ export default function Register() {
                             setEmail={setEmail}
                             setSenha={setSenha}
                             setConfirSenha={setConfirSenha}  
+                            setImagemPerfil={setImagemPerfil}
+                            ImagemPerfil={ImagemPerfil}
                         />
                     </div>
                    

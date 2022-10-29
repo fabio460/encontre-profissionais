@@ -1,7 +1,9 @@
 import React,{useEffect, useState} from 'react'
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { Avatar, IconButton } from '@mui/material';
+import { colorsLayout, initialsAvatar } from '../../../utils';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 interface typeObj{
     Nome:string,
     Email:string,
@@ -11,7 +13,8 @@ interface typeObj{
     setEmail:any,
     setSenha:any,
     setConfirSenha:any,
-
+    setImagemPerfil:any,
+    ImagemPerfil:any
 }
 export default function FormDadosPessoais({
     Nome,
@@ -21,11 +24,39 @@ export default function FormDadosPessoais({
     setNome,
     setEmail,
     setSenha,
-    setConfirSenha
+    setConfirSenha,
+    setImagemPerfil,
+    ImagemPerfil
     }:typeObj) {
 
+    
+    const [SrcImagemPerfil, setSrcImagemPerfil] = useState('')
+    useEffect(() => {
+        if(ImagemPerfil){
+            setSrcImagemPerfil(URL.createObjectURL(ImagemPerfil))
+        }
+       
+    }, [ImagemPerfil])
+    
   return (
     <div>
+
+        <div className='avatarPerfi'>
+            <IconButton color="primary" aria-label="upload picture" component="label" >
+                <input hidden accept="image/*" type="file" 
+                    onChange={(e:any)=>setImagemPerfil(e.target.files[0])}
+                />
+                <div className='textoMensagemDeFundoAvatarAtualizar'>
+                    <div> Adicione uma imagem</div>
+                    <CameraAltIcon/>
+                </div>
+                <Avatar 
+                    src={SrcImagemPerfil || ''}
+                    sx={{width:'170px',height:'170px',fontSize:'70px',bgcolor:colorsLayout}}
+                    >{initialsAvatar(Nome)}
+                </Avatar>
+            </IconButton>
+        </div>
         <TextField
             value={Nome}
             id="outlined-basic" 
