@@ -69,10 +69,10 @@ const db = getFirestore(app);
             }
           })
          
-          setMensagens(mensageFilter);   
+          setMensagens(mensageFilter.reverse());   
       });
     }
-    document.querySelector('.chatBody').scrollTo(0,10000000000)
+    
     getMensagensFirebase()
    
   },[userSelected,db])
@@ -82,14 +82,19 @@ const db = getFirestore(app);
       setChat()
     }
   }
+ // document.querySelector('.chatBody').scrollTo(0,10000000000)
   return (
-    <div className='chatBody'>
-
+    <div >
+      <div className='chatBody'>
       {Mensagens.map(e=>{
-        return <div>
-          <div className={userLogged.email === e.emailEmissor ? "emissor":"receptor"}> {e.emissor} - {e.mensagem}{e.id}</div>
+        return <div className='chatOut'>
+          <div className={userLogged.email === e.emailEmissor ? "emissor":"receptor"}>
+             {e.emissor} - {e.mensagem}
+          </div>
         </div>
       })}
+
+      </div>
       <div className='chatInput'>
         
         <input className='inputSearchChat' onKeyUp={setChatOnKeyUp} onChange={e=>setMensagem(e.target.value)} value={Mensagem}/>
