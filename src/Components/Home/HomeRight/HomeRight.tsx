@@ -33,6 +33,7 @@ export default function HomeRight() {
       }
     })
   }
+  var userLogged:listType = JSON.parse(localStorage.getItem('userLogged')||'null') 
   const users = useSelector<any,listType>(state=>state.FunctionsRedcer.getUsuariosReducer)
   const tamAvatar = "150px"
   const tamAvatar2 = "100px"
@@ -106,13 +107,12 @@ export default function HomeRight() {
                     }
               </div>
             </div>
-            <div className='chatContainer' >
+            {userLogged && <div className='chatContainer' >
               <div className='chatBtn'>
                 <Fab color='primary' onClick={handleVisibleChat}><ChatIcon/></Fab>
               </div>
               <div className={VisibleChat ? 'chat visibleChat' : 'chat'}><Chat/></div>
-             
-            </div>
+            </div>}
          </div>
          :
          <div className='homeRightEmpty'>

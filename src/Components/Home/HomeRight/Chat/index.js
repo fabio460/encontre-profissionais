@@ -5,8 +5,8 @@ import { collection, doc, getDocs, getFirestore, onSnapshot, orderBy, query, set
 import { useSelector } from 'react-redux';
 import firebaseConfig from './configFireBaseChats';
 import { initializeApp } from 'firebase/app';
-
-
+import IconButton from '@mui/material/IconButton';
+import NearMeIcon from '@mui/icons-material/NearMe';
 export default function Chat() {
 
 const app = initializeApp(firebaseConfig);
@@ -53,7 +53,7 @@ const db = getFirestore(app);
 
   useEffect(()=>{
     async function getMensagensFirebase() {
-      const q = query(collection(db, "chat"));
+      const q = query(collection(db, "chat"),orderBy('id'));
       onSnapshot(q, (querySnapshot) => {  
           let aux = []  
           querySnapshot.forEach((doc) => {
@@ -68,21 +68,34 @@ const db = getFirestore(app);
               return elem
             }
           })
+         
           setMensagens(mensageFilter);   
       });
     }
+    document.querySelector('.chatBody').scrollTo(0,10000000000)
     getMensagensFirebase()
-  },[userSelected])
+   
+  },[userSelected,db])
 
+  const setChatOnKeyUp = (event)=>{
+    if(event.code === "Enter" || event.code === "NumpadEnter"){
+      setChat()
+    }
+  }
   return (
-    <div >
-      <input onChange={e=>setMensagem(e.target.value)} value={Mensagem}/>
-      <button onClick={setChat}>inserir</button>
+    <div className='chatBody'>
+
       {Mensagens.map(e=>{
         return <div>
-          <div className={userLogged.email === e.emailEmissor ? "emissor":"receptor"}> {e.emissor} - {e.mensagem}</div>
+          <div className={userLogged.email === e.emailEmissor ? "emissor":"receptor"}> {e.emissor} - {e.mensagem}{e.id}</div>
         </div>
       })}
+      <div className='chatInput'>
+        
+        <input className='inputSearchChat' onKeyUp={setChatOnKeyUp} onChange={e=>setMensagem(e.target.value)} value={Mensagem}/>
+        <IconButton onClick={setChat}  color="primary"><NearMeIcon/></IconButton>
+        
+      </div>
     </div>
   )
 }
