@@ -17,11 +17,12 @@ import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux'
 import IconButton from '@mui/material/IconButton';
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
-import { firebaseConfig } from '../../firebaseConfig'
 import { initializeApp } from 'firebase/app'
+import firebaseConfig from '../Home/HomeRight/Chat/configFireBaseChats'
+
 
 export default function PerfilUpdate() {
-    initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig)
     const storage = getStorage();
     var user:listType = JSON.parse(localStorage.getItem('userLogged')||'null') 
     const [userLogged, setuserLoggedApi] = useState<listType>()

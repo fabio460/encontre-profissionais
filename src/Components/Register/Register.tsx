@@ -9,7 +9,8 @@ import { apiBase } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from '../../firebaseConfig';
+import firebaseConfig from '../Home/HomeRight/Chat/configFireBaseChats';
+
 
 export default function Register() {
     initializeApp(firebaseConfig);

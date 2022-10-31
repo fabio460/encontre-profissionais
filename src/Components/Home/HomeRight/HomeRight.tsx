@@ -42,10 +42,6 @@ export default function HomeRight() {
     setVisibleChat(!VisibleChat)
   }
 
-  const handleCloseChat = ()=>{
-    //setVisibleChat(false)
-    
-  }
   return (
     <div>
       <div className='homeRightButtonReturn'>

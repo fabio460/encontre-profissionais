@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -40,18 +40,22 @@ export default function MenuItensMobile() {
     nome:'',
     imagemPerfil:''
   })
-  if (userLogged) {
-    const formdata = new FormData()
-    formdata.append('email',userLogged.email)
-    fetch(apiBase+'getUsuarioPorEmail',{
-      method:'post',
-      body:formdata
-    })
-    .then(res=>res.json())
-    .then(res=>{
-      setUserLoggedApi(res[0])
-    })
-  }
+  useEffect(() => {
+    if (userLogged) {
+      const formdata = new FormData()
+      formdata.append('email',userLogged.email)
+      fetch(apiBase+'getUsuarioPorEmail',{
+        method:'post',
+        body:formdata
+      })
+      .then(res=>res.json())
+      .then(res=>{
+        setUserLoggedApi(res[0])
+      })
+    }
+  }, [])
+  
+  
   const dispatch = useDispatch()
   const getIdUsers = ()=>{
       dispatch({
