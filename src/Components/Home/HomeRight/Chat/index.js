@@ -8,6 +8,7 @@ import { initializeApp } from 'firebase/app';
 import IconButton from '@mui/material/IconButton';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import { Avatar } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 export default function Chat() {
 
 const app = initializeApp(firebaseConfig);
@@ -129,13 +130,16 @@ const [Mensagens, setMensagens] = useState([])
                       </Avatar>
                     </div>
                     <div>
-                      <div className='emissorMensage'>
-                          {e.mensagem} 
-                          <span onClick={()=>deleteMensage(e.id)}
-                              style={{cursor:'pointer',marginLeft:"5px",marginRight:'-20px'}}
-                            >
-                              x
-                          </span>
+                      <div style={{display:'flex',alignItems:'center'}}>
+                        <div className='emissorMensage'>{e.mensagem} </div>
+                        <span onClick={()=>deleteMensage(e.id)}
+                            style={{cursor:'pointer',marginLeft:"0px",marginRight:'0px'}}
+                          >
+                            <IconButton>
+                                <DeleteIcon color='error' sx={{width:'18px',height:'18px'}}/>
+                            </IconButton>
+                        </span>
+                        
                       </div>
                       <div className='emissorHora'>{e.hora && (e.hora).toString()}</div>
                     </div>
@@ -143,16 +147,17 @@ const [Mensagens, setMensagens] = useState([])
 
                   <div className='receptor' >
                     <div>
-                      <div className='receptorMensage'>
-                       
-                        <span onClick={()=>deleteMensage(e.id)}
-                              style={{cursor:'pointer',marginLeft:"-20px",marginRight:'10px',color:"black"}}
-                            >
-                              x
-                        </span>  
-                        {e.mensagem}
-                      </div>
-                      <div className='receptorHora'>{e.hora && (e.hora).toString()}</div>
+                        <div style={{display:'flex',alignItems:'center'}}>
+                            <span onClick={()=>deleteMensage(e.id)}
+                                    style={{marginLeft:"0px",marginRight:'0px',color:"black"}}
+                                  >
+                                    <IconButton>
+                                      <DeleteIcon color='error' sx={{width:'18px',height:'18px'}}/>
+                                    </IconButton>
+                              </span> 
+                              <div className='receptorMensage'> {e.mensagem}</div>
+                        </div>
+                        <div className='receptorHora'>{e.hora && (e.hora).toString()}</div>
                     </div>
                     <div className='receptorAvatar'>
                       <Avatar 
