@@ -141,7 +141,7 @@ const [Mensagens, setMensagens] = useState([])
                     </div>
                   </div>:
 
-                  <div className='receptor' onClick={()=>alert(e.id)}>
+                  <div className='receptor' >
                     <div>
                       <div className='receptorMensage'>
                        
