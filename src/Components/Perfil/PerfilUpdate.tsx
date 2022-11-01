@@ -125,7 +125,6 @@ export default function PerfilUpdate() {
                                     })
                                     let r = getReferenciaImageFireSorage(ImagemPerfil) || null
                                     if (r) {
-                                        console.log(r)
                                         const desertRef = ref(storage,r);
                                         deleteObject(desertRef).then(() => {
                                             console.log('deletada a ref '+r)
@@ -134,6 +133,7 @@ export default function PerfilUpdate() {
                                           });
                                     }
                                     localStorage.setItem('userLogged',JSON.stringify(user))
+
                                     dispatch({
                                         type:'btnUpdate',
                                         payload:{btnUpdate:false}

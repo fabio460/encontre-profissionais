@@ -1,22 +1,25 @@
 import React,{useEffect, useState} from 'react'
 import './chat.css'
 import { collection, doc, getDocs, getFirestore, onSnapshot, orderBy, query, setDoc } from "firebase/firestore"; 
-
+import {colorBackGround,initialsAvatar} from '../../../../utils'
 import { useSelector } from 'react-redux';
 import firebaseConfig from './configFireBaseChats';
 import { initializeApp } from 'firebase/app';
 import IconButton from '@mui/material/IconButton';
 import NearMeIcon from '@mui/icons-material/NearMe';
+import { Avatar } from '@mui/material';
 export default function Chat() {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+const userLoggedReducer = useSelector((state)=>state.UserLoggedReducer.userLogged)
+ const userSelectedReducer = useSelector(state=>state.FunctionsRedcer.getUsuariosReducer) 
+var userLogged = JSON.parse(localStorage.getItem('userLogged')||'null')  
 
-  var userLogged = JSON.parse(localStorage.getItem('userLogged')||'null')  
-  const userSelected = useSelector(state=>state.FunctionsRedcer.getUsuariosReducer) 
-  const [Mensagem, setMensagem] = useState('')
-  const [Mensagens, setMensagens] = useState([])
+const userSelected = useSelector(state=>state.FunctionsRedcer.getUsuariosReducer) 
+const [Mensagem, setMensagem] = useState('')
+const [Mensagens, setMensagens] = useState([])
   
   const setChat = async()=>{
       const querySnapshot = await getDocs(query(collection(db, "chat"),orderBy('id')));
@@ -45,7 +48,7 @@ const db = getFirestore(app);
         emailEmissor:userLogged.email,
         emailReceptor:userSelected.email,
         mensagem:Mensagem,
-        
+        hora: new Date()
       }) 
       }
      setMensagem('')
@@ -85,21 +88,63 @@ const db = getFirestore(app);
  // document.querySelector('.chatBody').scrollTo(0,10000000000)
   return (
     <div >
+      <div className='appBarChat'>
+         <Avatar 
+            sx={{marginRight:"10px",bgcolor:'#1976d2'}} 
+            src={userSelectedReducer.imagemPerfil}
+          >
+            {initialsAvatar(userSelectedReducer.nome)}
+          </Avatar>
+         <div className='appBarChatElements'>
+            <div className='appBarChatTitle'>{userSelectedReducer.nome}</div>
+            <div className='appBarChatItemProfissao'>{userSelectedReducer.profissao}</div>
+         </div>
+      </div>
       <div className='chatBody'>
-      {Mensagens.map(e=>{
-        return <div className='chatOut'>
-          <div className={userLogged.email === e.emailEmissor ? "emissor":"receptor"}>
-             {e.emissor} - {e.mensagem}
-          </div>
-        </div>
-      })}
+          
+          {Mensagens.map(e=>{
+            return <div className='chatOut'>
+              
+            {userLogged.email === e.emailEmissor ? 
+
+              <div className='emissor'>
+                <div className='emissorAvatar'>
+                  <Avatar 
+                     src={userLoggedReducer.imagemPerfil}
+                     sx={{bgcolor:'#1976d2'}}    
+                  >
+                      {initialsAvatar(e.nome)}
+                  </Avatar>
+                </div>
+                <div>
+                  <div className='emissorMensage'> {e.mensagem}</div>
+                  <div className='emissorHora'>{"e.hora"}</div>
+                </div>
+              </div>:
+
+              <div className='receptor'>
+                <div>
+                  <div className='receptorMensage'>{e.mensagem}</div>
+                  <div className='receptorHora'>{"e.hora"}</div>
+                </div>
+                <div className='receptorAvatar'>
+                  <Avatar 
+                    src={userSelectedReducer.imagemPerfil}  
+                    sx={{bgcolor:'#1976d2'}} 
+                  >
+                    {initialsAvatar(userSelectedReducer.nome)}
+                  </Avatar>
+                </div>
+              </div>}
+            </div>
+          })}
 
       </div>
       <div className='chatInput'>
-        
-        <input className='inputSearchChat' onKeyUp={setChatOnKeyUp} onChange={e=>setMensagem(e.target.value)} value={Mensagem}/>
-        <IconButton onClick={setChat}  color="primary"><NearMeIcon/></IconButton>
-        
+           <div className='chatInputContent' >
+              <input className='inputSearchChat'  onKeyUp={setChatOnKeyUp} onChange={e=>setMensagem(e.target.value)} value={Mensagem}/>
+              <IconButton onClick={setChat}  color="primary"><NearMeIcon/></IconButton>
+           </div>
       </div>
     </div>
   )

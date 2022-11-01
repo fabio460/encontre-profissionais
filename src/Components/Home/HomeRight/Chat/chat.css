@@ -4,7 +4,7 @@
     box-shadow: 2px 2px 5px  black;
     right: -100%;
     bottom: 10%;
-    min-width: 270px;
+    width: 400px;
     border-radius: 5px;
     transition: 0.2s;
     padding: 3px;   
@@ -16,6 +16,7 @@
     height: 400px;
     padding: 10px;
     transform: rotateX(180deg);
+   
 }
 .chatOut{
     transform: rotateX(180deg);
@@ -23,6 +24,7 @@
 .inputSearchChat{
     outline: 0;
     width: 80%;
+    background-color: rgb(229, 229, 254);
 }
 .chatInput{
     position: absolute;
@@ -33,6 +35,13 @@
     border-radius: 3px;
     padding: 5px;
     
+}
+.chatInputContent{
+    background-color: rgb(229, 229, 254);
+    width: 90%;
+    margin: auto;
+    border-radius: 30px;
+    padding: 0px 0px 0px 10px;
 }
 
 .chatBody::-webkit-scrollbar{
@@ -58,23 +67,67 @@
     content: none;
     border: none;
 }
-.emissor{
-    background-color: rgb(95, 251, 56);
-    padding: 5px;
-    border-radius: 3px;
+.emissorMensage{
+    background-color: rgb(229, 229, 254);
+    padding: 7px;
+    border-radius: 10px;
     max-width: 70%;
-    margin: 8px 0px 8px auto;
+    margin:  0px;
+}
+.receptorMensage{
+    padding: 7px;
+    background-color: #1976d2;
+    color:white;
+    border-radius: 10px;
+    margin: 8px 0px 0px auto;
+    word-break: break-all;
+}
+.emissor{
+    display: flex;
+    width: 90%;
+    margin-right: auto;
+    margin-bottom: 20px;
 }
 .receptor{
-    text-align: right;
-    padding: 3px;
-    background-color: rgb(3, 104, 187);
-    color:white;
-    border-radius: 3px;
-    max-width: 70%;
-    margin: 8px 0px;
+    width: 90%;
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
 }
-
+.emissorAvatar{
+    margin-right: 5px;
+    min-height: 60px;
+    display: flex;
+    align-items: flex-end;
+}
+.receptorAvatar{
+    margin-left: 5px;
+    min-height: 60px;
+    display: flex;
+    align-items: flex-end;
+}
+.receptorHora{
+    font-size: 12px;
+    color: gray;
+    text-align: right;
+}
+.emissorHora{
+    font-size: 12px;
+    color: gray;
+}
+.appBarChat{
+    display: flex;
+    padding: 10px;
+}
+.appBarChatTitle{
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.appBarChatItemProfissao{
+    font-size: 12px;
+    color: gray;
+}
 @media (max-width:700px) {
     .visibleChat{
         width: 80%;
@@ -82,5 +135,8 @@
     }
     .chatBtn{
         bottom: 3%;
+    }
+    .chat{
+        width: 80%;
     }
 }
