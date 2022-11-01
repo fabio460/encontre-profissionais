@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import './chat.css'
-import { collection, doc, getDocs, getFirestore, onSnapshot, orderBy, query, setDoc } from "firebase/firestore"; 
+import { collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, orderBy, query, setDoc } from "firebase/firestore"; 
 import {colorBackGround,initialsAvatar} from '../../../../utils'
 import { useSelector } from 'react-redux';
 import firebaseConfig from './configFireBaseChats';
@@ -63,6 +63,11 @@ const [Mensagens, setMensagens] = useState([])
      setMensagem('')
   }
 
+
+  const deleteMensage = (idDocument)=>{
+    deleteDoc(doc(db, "chat", idDocument.toString()));
+  }
+
   useEffect(()=>{
     async function getMensagensFirebase() {
       const q = query(collection(db, "chat"),orderBy('id'));
@@ -113,38 +118,52 @@ const [Mensagens, setMensagens] = useState([])
           
           {Mensagens.map(e=>{
             return <div className='chatOut'>
-              
-            {userLogged.email === e.emailEmissor ? 
+                {userLogged.email === e.emailEmissor ? 
+                  <div className='emissor' >
+                    <div className='emissorAvatar'>
+                      <Avatar 
+                        src={userLoggedReducer.imagemPerfil}
+                        sx={{bgcolor:'#1976d2'}}    
+                      >
+                          {initialsAvatar(e.nome)}
+                      </Avatar>
+                    </div>
+                    <div>
+                      <div className='emissorMensage'>
+                          {e.mensagem} 
+                          <span onClick={()=>deleteMensage(e.id)}
+                              style={{cursor:'pointer',marginLeft:"5px",marginRight:'-20px'}}
+                            >
+                              x
+                          </span>
+                      </div>
+                      <div className='emissorHora'>{e.hora && (e.hora).toString()}</div>
+                    </div>
+                  </div>:
 
-              <div className='emissor'>
-                <div className='emissorAvatar'>
-                  <Avatar 
-                     src={userLoggedReducer.imagemPerfil}
-                     sx={{bgcolor:'#1976d2'}}    
-                  >
-                      {initialsAvatar(e.nome)}
-                  </Avatar>
-                </div>
-                <div>
-                  <div className='emissorMensage'> {e.mensagem}</div>
-                  <div className='emissorHora'>{e.hora && (e.hora).toString()}</div>
-                </div>
-              </div>:
-
-              <div className='receptor'>
-                <div>
-                  <div className='receptorMensage'>{e.mensagem}</div>
-                  <div className='receptorHora'>{e.hora && (e.hora).toString()}</div>
-                </div>
-                <div className='receptorAvatar'>
-                  <Avatar 
-                    src={userSelectedReducer.imagemPerfil}  
-                    sx={{bgcolor:'#1976d2'}} 
-                  >
-                    {initialsAvatar(userSelectedReducer.nome)}
-                  </Avatar>
-                </div>
-              </div>}
+                  <div className='receptor' onClick={()=>alert(e.id)}>
+                    <div>
+                      <div className='receptorMensage'>
+                       
+                        <span onClick={()=>deleteMensage(e.id)}
+                              style={{cursor:'pointer',marginLeft:"-20px",marginRight:'10px',color:"black"}}
+                            >
+                              x
+                        </span>  
+                        {e.mensagem}
+                      </div>
+                      <div className='receptorHora'>{e.hora && (e.hora).toString()}</div>
+                    </div>
+                    <div className='receptorAvatar'>
+                      <Avatar 
+                        src={userSelectedReducer.imagemPerfil}  
+                        sx={{bgcolor:'#1976d2'}} 
+                      >
+                        {initialsAvatar(userSelectedReducer.nome)}
+                      </Avatar>
+                    </div>
+                  </div>
+                }
             </div>
           })}
 

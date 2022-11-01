@@ -73,7 +73,8 @@
     border-radius: 10px;
     width: 100%;
     margin: 0px;
-    
+    display: flex;
+    justify-content: space-between;
 }
 .receptorMensage{
     padding: 7px;
@@ -120,6 +121,7 @@
 .appBarChat{
     display: flex;
     padding: 10px;
+    background-color: rgb(229, 229, 254);
 }
 .appBarChatTitle{
     font-weight: bold;

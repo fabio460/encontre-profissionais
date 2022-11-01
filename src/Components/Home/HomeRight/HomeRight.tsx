@@ -109,6 +109,7 @@ export default function HomeRight() {
             </div>
             {userLogged && <div className='chatContainer' >
               <div className='chatBtn'>
+                <div style={{textAlign:"center"}}>Chat</div>
                 <Fab color='primary' onClick={handleVisibleChat}><ChatIcon/></Fab>
               </div>
               <div className={VisibleChat ? 'chat visibleChat' : 'chat'}><Chat/></div>
