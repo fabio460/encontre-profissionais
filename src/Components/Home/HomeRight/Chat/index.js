@@ -48,7 +48,16 @@ const [Mensagens, setMensagens] = useState([])
         emailEmissor:userLogged.email,
         emailReceptor:userSelected.email,
         mensagem:Mensagem,
-        hora: new Date()
+        hora: (
+          new Date().getHours() < 0 ?
+            "0"+ new Date().getHours():
+            new Date().getHours()
+          ).toString()
+           +":"+ 
+          (new Date().getMinutes() < 0 ?
+          "0"+ new Date().getMinutes():
+          new Date().getMinutes()
+          ).toString()
       }) 
       }
      setMensagem('')
@@ -85,7 +94,7 @@ const [Mensagens, setMensagens] = useState([])
       setChat()
     }
   }
- // document.querySelector('.chatBody').scrollTo(0,10000000000)
+ 
   return (
     <div >
       <div className='appBarChat'>
@@ -118,14 +127,14 @@ const [Mensagens, setMensagens] = useState([])
                 </div>
                 <div>
                   <div className='emissorMensage'> {e.mensagem}</div>
-                  <div className='emissorHora'>{"e.hora"}</div>
+                  <div className='emissorHora'>{e.hora && (e.hora).toString()}</div>
                 </div>
               </div>:
 
               <div className='receptor'>
                 <div>
                   <div className='receptorMensage'>{e.mensagem}</div>
-                  <div className='receptorHora'>{"e.hora"}</div>
+                  <div className='receptorHora'>{e.hora && (e.hora).toString()}</div>
                 </div>
                 <div className='receptorAvatar'>
                   <Avatar 

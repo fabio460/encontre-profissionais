@@ -71,8 +71,9 @@
     background-color: rgb(229, 229, 254);
     padding: 7px;
     border-radius: 10px;
-    max-width: 70%;
-    margin:  0px;
+    width: 100%;
+    margin: 0px;
+    
 }
 .receptorMensage{
     padding: 7px;
