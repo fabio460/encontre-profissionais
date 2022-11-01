@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import './chat.css'
-import { collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, orderBy, query, setDoc } from "firebase/firestore"; 
+import { collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, orderBy, query, setDoc, updateDoc } from "firebase/firestore"; 
 import {colorBackGround,initialsAvatar} from '../../../../utils'
 import { useSelector } from 'react-redux';
 import firebaseConfig from './configFireBaseChats';
@@ -28,38 +28,44 @@ const [Mensagens, setMensagens] = useState([])
       let id=0
       // se quant = 0 e porque a lista esta vazia, logo o seu id vai ser 0. Se não, vou percorrer pelo maior id e incrementar 
       if(quant === 0){      
-        setDoc(doc(db, "chat", '0'), {
-          id:0,
-          emissor:userLogged.nome,
-          receptor:userSelected.nome,
-          emailEmissor:userLogged.email,
-          emailReceptor:userSelected.email,
-          mensagem:Mensagem,
-        })  
+        if (Mensagem !== '') {
+          setDoc(doc(db, "chat", '0'), {
+            id:0,
+            emissor:userLogged.nome,
+            receptor:userSelected.nome,
+            emailEmissor:userLogged.email,
+            emailReceptor:userSelected.email,
+            mensagem:Mensagem,
+            lida:"true",
+          })  
+        }
       }else{
-       querySnapshot.forEach(elem=>{
-          if (elem.data().id >= id) {
-            id = elem.data().id
-          }
-       }) 
-       setDoc(doc(db, "chat", (id + 1).toString()), {
-        id:id+1,
-        emissor:userLogged.nome,
-        receptor:userSelected.nome,
-        emailEmissor:userLogged.email,
-        emailReceptor:userSelected.email,
-        mensagem:Mensagem,
-        hora: (
-          new Date().getHours() < 0 ?
-            "0"+ new Date().getHours():
-            new Date().getHours()
-          ).toString()
-           +":"+ 
-          (new Date().getMinutes() < 0 ?
-          "0"+ new Date().getMinutes():
-          new Date().getMinutes()
-          ).toString()
-      }) 
+         if (Mensagem !== '') {
+            querySnapshot.forEach(elem=>{
+              if (elem.data().id >= id) {
+                id = elem.data().id
+              }
+            }) 
+            setDoc(doc(db, "chat", (id + 1).toString()), {
+              id:id+1,
+              emissor:userLogged.nome,
+              receptor:userSelected.nome,
+              emailEmissor:userLogged.email,
+              emailReceptor:userSelected.email,
+              mensagem:Mensagem,
+              lida:"true",
+              hora: (
+                new Date().getHours() < 0 ?
+                  "0"+ new Date().getHours():
+                  new Date().getHours()
+                ).toString()
+                +":"+ 
+                (new Date().getMinutes() < 0 ?
+                "0"+ new Date().getMinutes():
+                new Date().getMinutes()
+                ).toString()
+            })
+         } 
       }
      setMensagem('')
   }
@@ -69,6 +75,7 @@ const [Mensagens, setMensagens] = useState([])
     deleteDoc(doc(db, "chat", idDocument.toString()));
   }
 
+  
   useEffect(()=>{
     async function getMensagensFirebase() {
       const q = query(collection(db, "chat"),orderBy('id'));
@@ -76,6 +83,9 @@ const [Mensagens, setMensagens] = useState([])
           let aux = []  
           querySnapshot.forEach((doc) => {
               aux.push(doc.data()) 
+              if (doc.data().lida) {
+                console.log( doc.data())
+              }
           });
           let mensageFilter = aux.filter((elem,key)=>{
             if ( 
@@ -86,7 +96,7 @@ const [Mensagens, setMensagens] = useState([])
               return elem
             }
           })
-         
+          
           setMensagens(mensageFilter.reverse());   
       });
     }
