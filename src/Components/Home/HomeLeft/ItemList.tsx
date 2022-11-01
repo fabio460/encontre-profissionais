@@ -24,7 +24,7 @@ export default function ListItens({elem,index}:PropsType) {
     
   }
   const selectIndex = useSelector<any,number>(state=>state.FunctionsRedcer.index) 
-  
+   
   return(
     <ListItemButton selected={selectIndex === index && true} onClick={getIdUsers} className='ListItens' id={index.toString()}>
       <Avatar src={elem.imagemPerfil} sx={{bgcolor:ramdomColors(),marginRight:'10px'}} >{initialsAvatar(elem.nome)}</Avatar>
@@ -33,6 +33,7 @@ export default function ListItens({elem,index}:PropsType) {
          <div style={{color:'grey',fontSize:'13px'}}>{elem.profissao}</div>
          <div style={{color:'grey',fontSize:'13px'}}>{elem.bairro}</div>
       </div>
+      <div className='lida' id={elem.email}></div>
     </ListItemButton>
   )
 }

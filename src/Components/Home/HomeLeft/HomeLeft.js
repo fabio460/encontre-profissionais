@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useEffect} from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
@@ -24,6 +24,11 @@ import Perfil from '../../Perfil/Perfil';
 import NoLoggedComponent from '../../NoLoggedComponent/NoLoggedComponent';
 import PerfilUpdate from '../../Perfil/PerfilUpdate';
 import { useSelector } from 'react-redux';
+
+
+import { collection, getFirestore, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { initializeApp } from 'firebase/app'
+import firebaseConfig from '../HomeRight/Chat/configFireBaseChats';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -109,6 +114,42 @@ export default function HomeLeft() {
 
   const btnUpdate = useSelector(state=>state.BtnUpdateReducer.btnUpdate)
   
+
+  var user = JSON.parse(localStorage.getItem('userLogged')||'null') 
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+   useEffect(() => {
+     if (user) {
+      const q = query(collection(db, "chat"),orderBy('id'));
+      onSnapshot(q, (querySnapshot) => {  
+          let aux = []  
+          querySnapshot.forEach((doc) => {
+              let msg = doc.data()
+             
+              if ( msg.emailReceptor === user.email && msg.lida === 'true') {
+                //console.log(msg)
+                //document.querySelector('.fabio2@gmail.com').innerHTML='sim'
+                aux.push(msg) 
+                document.querySelectorAll('.lida').forEach(e=>{  
+                  if (e.id === msg.emailEmissor) {
+                    e.innerHTML='sim'
+                  }
+                })
+              }
+             
+          });  
+         // console.log(user.email)
+        
+      });
+     }
+   }, [])
+   
+   
+
+   
+
+
   return (
     <Box
       sx={{

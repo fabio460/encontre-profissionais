@@ -13,5 +13,6 @@ export interface listType{
     profissao:string,
     telefone:string,
     observacoesFinais:string,
-    outrasHabilidades:string
+    outrasHabilidades:string,
+    lida:string
   }
