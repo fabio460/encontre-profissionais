@@ -5,7 +5,8 @@ interface typeObj{
   Profissao:string,
   OutrasHabilidades:string,
   ObservacoesFinais:string,
-
+  Telefone:string,
+  setTelefone:FunctionStringCallback,
   setProfissao:FunctionStringCallback,
   setOutrasHabilidades:FunctionStringCallback,
   setObservacoesFinais:FunctionStringCallback,
@@ -16,8 +17,9 @@ export default function FormFinal({
   OutrasHabilidades,
   setOutrasHabilidades,
   ObservacoesFinais,
-  setObservacoesFinais
-
+  setObservacoesFinais,
+  setTelefone,
+  Telefone
 }:typeObj) {
   return (
     <div>
@@ -32,6 +34,18 @@ export default function FormFinal({
             size='small'
         />
         <div id='validName' style={{display:'none',color:'red',marginLeft:'5px',marginBottom:'10px'}}>compo nulo</div>
+
+        <TextField
+            value={Telefone}
+            id="outlined-basic" 
+            label="Telefone"
+            variant="outlined"
+            onChange={e=>setTelefone(e.target.value)}
+            type='text'
+            sx={{margin:'5px 0px',color:'white',width:'100%'}} 
+            size='small'
+        />
+
         <TextField
             value={OutrasHabilidades}
             id="outlined-basic" 

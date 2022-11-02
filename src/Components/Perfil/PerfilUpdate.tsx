@@ -225,7 +225,7 @@ export default function PerfilUpdate() {
                     <TextField
                         id="standard-helperText"
                         label="Telefone"
-                        defaultValue=   {userLogged.telefone}
+                        defaultValue={userLogged.telefone}
                         variant="standard"
                         onChange={e=>setTelefone(e.target.value)}
                     />

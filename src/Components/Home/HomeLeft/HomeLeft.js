@@ -93,16 +93,16 @@ export default function HomeLeft() {
 
   const fabs = [
     {
-      color: 'primary',
-      sx: fabStyle,
-      icon: <AddIcon />,
-      label: 'Add',
+      // color: 'primary',
+      // sx: fabStyle,
+      // icon: <AddIcon />,
+      // label: 'Add',
     },
     {
-      color: 'secondary',
-      sx: fabStyle,
-      icon: <EditIcon />,
-      label: 'Edit',
+      // color: 'secondary',
+      // sx: fabStyle,
+      // icon: <EditIcon />,
+      // label: 'Edit',
     },
   ];
 
@@ -179,8 +179,7 @@ export default function HomeLeft() {
         <TabPanel value={value} index={0} dir={theme.direction}
             className='TabPainel'
             sx={{height:'calc(100vh - 252px)'}}
-        >
-          
+        > 
           {
             localStorage.getItem('userLogged')?
             <div>
@@ -210,21 +209,7 @@ export default function HomeLeft() {
         </TabPanel>
 
       </SwipeableViews>
-      {fabs.map((fab, index) => (
-        <Zoom
-          key={fab.color}
-          in={value === index}
-          timeout={transitionDuration}
-          style={{
-            transitionDelay: `${value === index ? transitionDuration.exit : 0}ms`,
-          }}
-          unmountOnExit
-        >
-          <Fab sx={fab.sx} aria-label={fab.label} color={fab.color}>
-            {fab.icon}
-          </Fab>
-        </Zoom>
-      ))}
+   
     </Box>
   );
 }

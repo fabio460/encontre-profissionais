@@ -70,7 +70,7 @@ export default function Perfil() {
                     <Avatar><EmailIcon/></Avatar>
                 </div>
                 <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
-                    {userLogged.telefone}
+                    {userLogged.telefone !== 'undefined' && userLogged.telefone}
                     <Avatar><CallIcon/></Avatar>
                 </div>
               </div>
@@ -78,7 +78,7 @@ export default function Perfil() {
               <div className='perfilItems' style={{background:colorBackGround}}>
              
                   <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
-                    {userLogged.rua}, nº {userLogged.logradouro && userLogged.logradouro} {userLogged.complemento && userLogged.complemento}
+                    {userLogged.rua}, nº {userLogged.logradouro !== 'undefined' ? userLogged.logradouro:"S/N"} {userLogged.complemento && userLogged.complemento}
                     <Avatar><StreetviewIcon/></Avatar>
                   </div>
                   <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 

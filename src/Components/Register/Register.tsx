@@ -33,6 +33,7 @@ export default function Register() {
     const [Complemento, setComplemento] = useState<string>('')
 
     const [Profissao, setProfissao] = useState<string>('')
+    const [Telefone, setTelefone] = useState<string>('')
     const [OutrasHabilidades, setOutrasHabilidades] = useState<string>('')
     const [ObservacoesFinais, setObservacoesFinais] = useState<string>('')
     const [urlImagemPerfil, setUrlImagemPerfil] = useState('')
@@ -76,6 +77,7 @@ export default function Register() {
                     formdata.append('rua',Rua)
                     formdata.append('complemento',Complemento)
                     formdata.append('profissao',Profissao)
+                    formdata.append('telefone',Telefone)
                     formdata.append('observacoesFinais',ObservacoesFinais)
                     formdata.append('outrasHabilidades',OutrasHabilidades)
                     fetch(apiBase+'setUsuario',{
@@ -98,6 +100,7 @@ export default function Register() {
                 formdata.append('rua',Rua)
                 formdata.append('complemento',Complemento)
                 formdata.append('profissao',Profissao)
+                formdata.append('telefone',Telefone)
                 formdata.append('observacoesFinais',ObservacoesFinais)
                 formdata.append('outrasHabilidades',OutrasHabilidades)
                 fetch(apiBase+'setUsuario',{
@@ -231,6 +234,8 @@ export default function Register() {
                                 setObservacoesFinais={setObservacoesFinais}
                                 setOutrasHabilidades={setOutrasHabilidades}
                                 setProfissao={setProfissao}
+                                Telefone={Telefone}
+                                setTelefone={setTelefone}
                             />
                         </div>
                         <div style={{display:'flex',justifyContent:'space-between'}}>
