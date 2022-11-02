@@ -84,7 +84,15 @@ const [Mensagens, setMensagens] = useState([])
           querySnapshot.forEach((doc) => {
               aux.push(doc.data()) 
               if (doc.data().lida) {
-                console.log( doc.data())
+                //console.log( doc.data())
+                let msg = doc.data()
+                document.querySelectorAll('.lida').forEach(e=>{  
+                  if (e.id === msg.emailEmissor ) {
+                    //console.log(e.id)
+                   // e.innerHTML=msg.lida
+                    e.value=msg.lida
+                  }
+                })
               }
           });
           let mensageFilter = aux.filter((elem,key)=>{
@@ -132,11 +140,12 @@ const [Mensagens, setMensagens] = useState([])
                 {userLogged.email === e.emailEmissor ? 
                   <div className='emissor' >
                     <div className='emissorAvatar'>
+                      
                       <Avatar 
                         src={userLoggedReducer.imagemPerfil}
                         sx={{bgcolor:'#1976d2'}}    
                       >
-                          {initialsAvatar(e.nome)}
+                          {initialsAvatar(userLoggedReducer.nome)}
                       </Avatar>
                     </div>
                     <div>
@@ -170,6 +179,7 @@ const [Mensagens, setMensagens] = useState([])
                         <div className='receptorHora'>{e.hora && (e.hora).toString()}</div>
                     </div>
                     <div className='receptorAvatar'>
+                      
                       <Avatar 
                         src={userSelectedReducer.imagemPerfil}  
                         sx={{bgcolor:'#1976d2'}} 

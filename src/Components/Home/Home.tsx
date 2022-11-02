@@ -16,7 +16,22 @@ export default function Home() {
 
 
   
+  useEffect(()=>{
+    if (user) {
+      const formdata = new FormData()
+      formdata.append('email',user.email)
+      fetch(apiBase+'getUsuarioPorEmail',{
+        method:'post',
+        body:formdata
+      }).then(res=>res.json()).then(res=>{
+          dispatch({
+            type:'userLogged',
+            payload:{userLogged:res[0]}
+          })
+      })
+    }
 
+  },[])
 
   return (
     <div className='home'>
