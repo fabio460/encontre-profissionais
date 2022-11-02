@@ -11,10 +11,11 @@ export default function UsersList() {
     const [loading, setLoading] = useState(true)
     const [list, setlist] = useState<listType[]>([])   
     var userLogged:listType = JSON.parse(localStorage.getItem('userLogged')||'null')  
+    let filterByName = []
+    const search = useSelector((state:{inputSearchReducer:any,value:string})=>state.inputSearchReducer.value)
     useEffect(() => {
       fetch(getUsuarios)
       .then(res=>res.json())
-  
       .then(res=>{
         let aux = []
         if (userLogged) {
@@ -23,16 +24,30 @@ export default function UsersList() {
               return res
             }
           })
+          
           setlist(aux.reverse())        
-        }else{
+        }else{         
           setlist(res.reverse())
         }
-
-          
           setLoading(false)
       })
-    
     }, [])
+
+    let primeiraLetraMaiouscula = search.slice(0,1).toLocaleUpperCase()
+    let primeiraLetraMinuscula = search.slice(0,1).toLocaleLowerCase()
+    let restante = search.slice(1)
+    let maiusculo = primeiraLetraMaiouscula+restante
+    let minusculo = primeiraLetraMinuscula+restante
+
+    filterByName = list.filter((item)=>{
+      if  (
+           (item.nome.includes(maiusculo) ||item.profissao.includes(maiusculo)) ||
+           (item.nome.includes(minusculo) ||item.profissao.includes(minusculo))
+          ) 
+      {
+        return item
+      }
+    })
   
   return (
     <div>
@@ -42,7 +57,7 @@ export default function UsersList() {
             </Box>
         }
         
-        {list.map((elem,key)=>{
+        {filterByName.map((elem,key)=>{
             return <ItemList elem={elem} index={key} />
         })}
     

@@ -4,6 +4,7 @@ import FunctionsRedcer from './FunctionsReducers'
 import InputsObjectsReducer from './InputsObjectsReducer'
 import ValidationFormReducer from './ValidationFormReducer'
 import UserLoggedReducer from './userLoggedReducer'
+import inputSearchReducer from './inputSearchReducer'
 
 export default configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export default configureStore({
     BtnUpdateReducer,
     ValidationFormReducer,
     InputsObjectsReducer,
-    UserLoggedReducer
+    UserLoggedReducer,
+    inputSearchReducer
   },
 })
