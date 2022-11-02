@@ -112,6 +112,10 @@
    justify-content: center;
    align-items: center;
 }
+.horaMensage{
+   font-size: 10px;
+   margin-bottom: 5px;
+}
 @media (max-width:750px) {
    .homeRightBody{
       grid-template-columns: 1fr;

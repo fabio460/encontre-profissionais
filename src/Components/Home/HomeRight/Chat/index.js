@@ -37,6 +37,16 @@ const [Mensagens, setMensagens] = useState([])
             emailReceptor:userSelected.email,
             mensagem:Mensagem,
             lida:"true",
+            hora: (
+              new Date().getHours() < 10 ?
+                "0"+ new Date().getHours():
+                new Date().getHours()
+              ).toString()
+              +":"+ 
+              (new Date().getMinutes() < 10 ?
+              "0"+ new Date().getMinutes():
+              new Date().getMinutes()
+              ).toString()
           })  
         }
       }else{
@@ -55,12 +65,12 @@ const [Mensagens, setMensagens] = useState([])
               mensagem:Mensagem,
               lida:"true",
               hora: (
-                new Date().getHours() < 0 ?
+                new Date().getHours() < 10 ?
                   "0"+ new Date().getHours():
                   new Date().getHours()
                 ).toString()
                 +":"+ 
-                (new Date().getMinutes() < 0 ?
+                (new Date().getMinutes() < 10 ?
                 "0"+ new Date().getMinutes():
                 new Date().getMinutes()
                 ).toString()

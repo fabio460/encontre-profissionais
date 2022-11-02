@@ -28,7 +28,11 @@ export default function ListItens({elem,index}:PropsType) {
         }
       })
       if (user) {
-        const q = query(collection(db, "chat"), where("emailEmissor", "==", elem.email), where("lida", "==", "true") );
+        const q = query(collection(db, "chat"),
+           where("emailEmissor", "==", elem.email),
+           where("lida", "==", "true"),
+           where("emailReceptor","==",user.email),
+        );
         onSnapshot(q,async (querySnapshot) => {
          const cities:Object[] = [];
          querySnapshot.forEach((document) => {
