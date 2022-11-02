@@ -95,6 +95,23 @@
 .roll2{
    right: -600px;
 }
+.lida{
+   width: 20px;
+   margin-left: auto;
+}
+.quantMensage{
+   background-color: rgb(0, 234, 0);
+   width: 23px;
+   height: 23px;
+   border-radius: 15px;
+   
+   color: white;
+   margin-left: auto;
+   font-size: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
 @media (max-width:750px) {
    .homeRightBody{
       grid-template-columns: 1fr;

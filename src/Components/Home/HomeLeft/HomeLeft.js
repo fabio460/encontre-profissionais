@@ -104,12 +104,6 @@ export default function HomeLeft() {
       icon: <EditIcon />,
       label: 'Edit',
     },
-    // {
-    //   color: 'inherit',
-    //   sx: { ...fabStyle, ...fabGreenStyle },
-    //   icon: <UpIcon />,
-    //   label: 'small',
-    // },
   ];
 
   const btnUpdate = useSelector(state=>state.BtnUpdateReducer.btnUpdate)
@@ -118,32 +112,26 @@ export default function HomeLeft() {
   var user = JSON.parse(localStorage.getItem('userLogged')||'null') 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-  const q = query(collection(db, "chat"),orderBy('id'));
 
   const [lido,setLido]= useState()
 
-  const updateLido = async()=>{
-    const cityRef = doc(db, 'chat', lido.toString());
-    await updateDoc(cityRef, {
-        lida: "false"
-    });
-  }
-
   const cities = [];
   useEffect(()=>{
-    setTimeout(() => {
-      document.querySelectorAll('.lida').forEach(async e=>{ 
-        const Q = query(collection(db, "chat"), where("emailEmissor", "==", e.id),where("lida", "==", "true"));
-        const tam = await getDocs(Q)
-        onSnapshot(Q,async (querySnapshot) => {
-          querySnapshot.forEach( (doc) => {
-              cities.push(doc.data());
-              setLido(tam.size)
-              e.innerHTML =tam.size
+     if(user){
+      setTimeout(() => {
+        document.querySelectorAll('.lida').forEach(async e=>{ 
+          const Q = query(collection(db, "chat"), where("emailEmissor", "==", e.id),where("lida", "==", "true"));
+          const tam = await getDocs(Q)
+          onSnapshot(Q,async (querySnapshot) => {
+            querySnapshot.forEach( (doc) => {
+                cities.push(doc.data());
+                setLido(tam.size)
+                if(tam.size > 0 ) e.innerHTML = '<div class=quantMensage>' + tam.size + '</div>'
+            });
           });
-        });
-      })
-    }, 1000);
+        })
+      }, 1500);
+     }
   },[userSelected,cities])
  
  
@@ -186,7 +174,7 @@ export default function HomeLeft() {
             className='TabPainel'
             sx={{height:'calc(100vh - 252px)'}}
         >
-          <button onClick={updateLido}>teste</button>
+          
           {
             localStorage.getItem('userLogged')?
             <div>

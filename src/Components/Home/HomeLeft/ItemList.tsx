@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useRef} from 'react'
 import { listType } from '../../../types'
 import Avatar from '@mui/material/Avatar'
 import { backgoundAppBar, colorBackGround, initialsAvatar, ramdomColors } from '../../../utils'
@@ -17,6 +17,7 @@ export default function ListItens({elem,index}:PropsType) {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const dispatch = useDispatch()
+  var user = JSON.parse(localStorage.getItem('userLogged')||'null') 
   const getIdUsers = ()=>{
       dispatch({
         type:'functions',
@@ -26,16 +27,18 @@ export default function ListItens({elem,index}:PropsType) {
           index:index        
         }
       })
-      const q = query(collection(db, "chat"), where("emailEmissor", "==", elem.email), where("lida", "==", "true") );
-       onSnapshot(q,async (querySnapshot) => {
-        const cities:Object[] = [];
-        querySnapshot.forEach((document) => {
-            const cityRef = doc(db, 'chat', (document.data().id).toString());
-             updateDoc(cityRef, {
-                lida: "false"
-            });
-        });
-      });
+      if (user) {
+        const q = query(collection(db, "chat"), where("emailEmissor", "==", elem.email), where("lida", "==", "true") );
+        onSnapshot(q,async (querySnapshot) => {
+         const cities:Object[] = [];
+         querySnapshot.forEach((document) => {
+             const cityRef = doc(db, 'chat', (document.data().id).toString());
+              updateDoc(cityRef, {
+                 lida: "false"
+             });
+         });
+       });
+      }
       
   }
   const selectIndex = useSelector<any,number>(state=>state.FunctionsRedcer.index) 
