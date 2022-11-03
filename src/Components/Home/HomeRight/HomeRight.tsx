@@ -47,6 +47,7 @@ export default function HomeRight() {
     <div>
       <div className='homeRightButtonReturn'>
         <Button onClick={voltar} >voltar</Button>
+        <Button onClick={handleVisibleChat} >chat</Button>
       </div>
       { users._id ?  
          <div className='homeRightContainer' >
@@ -114,6 +115,7 @@ export default function HomeRight() {
               </div>
               <div className={VisibleChat ? 'chat visibleChat' : 'chat'}><Chat/></div>
             </div>}
+            
          </div>
          :
          <div className='homeRightEmpty'>

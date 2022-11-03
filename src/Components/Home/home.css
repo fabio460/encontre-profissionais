@@ -160,6 +160,9 @@
       min-height: 100%;
     }
     .homeRightButtonReturn{
-      display: block;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      
     }
 }
