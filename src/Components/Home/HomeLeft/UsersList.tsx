@@ -78,6 +78,17 @@ export default function UsersList() {
    const handleChangeRadio = (event:React.ChangeEvent<HTMLInputElement>) => {
      setValue(event.target.value);
    };
+   function handleVisiblePagination() {
+    if ( filterPages.length >= 5 ) {
+      return true
+    }else{
+      if (page !== 1) {
+        return true
+      }else{
+        return false
+      }
+    }
+ }
   return (
     <div>
         {loading ?
@@ -97,17 +108,24 @@ export default function UsersList() {
                 >
                
                     <div style={{display:'flex',justifyContent:'flex-end',alignItems:'center'}}>
-                      {list.length >= 10 &&  <FormLabel id="demo-radio-buttons-group-label" sx={{width:"100%"}}>Intervalo da lista</FormLabel>}
-                      {list.length >= 10 && <FormControlLabel value={'5'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>5</div>} />}
-                      {list.length >= 15 && <FormControlLabel value={'10'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>10</div>} />}
-                      {list.length >= 15 && <FormControlLabel value={'15'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>15</div>} />}
+                      {list.length > 10 &&  <FormLabel id="demo-radio-buttons-group-label" sx={{width:"100%"}}>Intervalo da lista</FormLabel>}
+                      {list.length > 10 && <FormControlLabel value={'5'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>5</div>} />}
+                      {list.length > 10 && <FormControlLabel value={'10'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>10</div>} />}
+                      {list.length > 15 && <FormControlLabel value={'15'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>15</div>} />}
                     </div>
                 </RadioGroup>
               </FormControl>
-              {filterPages.map((elem,key)=>{
-                 return <ItemList elem={elem} index={key} />
-              })}
-             <Pagination count={countPage} page={page} onChange={handleChange} color='secondary'/>
+              { filterPages.length > 0 ? 
+                    <div>
+                      {filterPages.map((elem,key)=>{
+                        return <ItemList elem={elem} index={key} />
+                      })}
+                   </div>:
+                   <div id='naoEncontrado' style={{textAlign:'center',marginTop:"60px"}}>Não encontrado! </div>
+                }
+                <div style={{display:'flex',justifyContent:"center"}}>
+                   {handleVisiblePagination() && <Pagination count={countPage} page={page} onChange={handleChange} color='secondary'/>}
+                </div>
             </div>
         }
          
