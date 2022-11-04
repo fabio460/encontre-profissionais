@@ -62,11 +62,11 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
               <div className='btnReturMensage'>
                  <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white'}}/></IconButton>
               </div>
-              <div style={{display:'flex',justifyContent:'space-between',width:'100%'}}>
-                  <div className='btnReturMensageMobile'>
+              <div className='btnReturMensageMobile' style={{justifyContent:'space-between',width:'100%'}}>
+                  <div >
                     <IconButton onClick={voltar}><ArrowBackIosNew sx={{color:'white',margin:'10px 0px 0px -10px'}}/></IconButton>
                   </div>
-                  <div className='btnReturMensageMobile' style={{display:'flex',justifyContent:'flex-end'}}>
+                  <div  style={{display:'flex',justifyContent:'flex-end'}}>
                     <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white',margin:'10px -8px 0px auto'}}/></IconButton>
                   </div>
               </div>
