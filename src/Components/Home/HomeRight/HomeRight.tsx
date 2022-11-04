@@ -5,7 +5,11 @@ import {useSelector,useDispatch} from 'react-redux'
 import { listType } from '../../../types'
 import { colorsLayout, colorTextAbbBar } from '../../../utils'
 import { initialsAvatar } from '../../../utils'
-import HowToRegIcon from '@mui/icons-material/HowToReg';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import Diversity2Icon from '@mui/icons-material/Diversity2';
@@ -25,12 +29,13 @@ import ArrowBackIosNew from '@mui/icons-material/ArrowBackIosNew'
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useNavigate } from 'react-router-dom'
 interface typeFunction{
   setVisibleChat:any
 }
 export default function HomeRight({setVisibleChat}:typeFunction) {
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const voltar = ()=>{
     dispatch({
       type:'functions',
@@ -46,9 +51,15 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
   const tamAvatar2 = "100px"
 
   
-  const handleVisibleChat = ()=>{
-    
-  }
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -60,14 +71,14 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
          <div className='homeRightContainer' >
             <div className='homeRightHeader' style={{background:colorsLayout,color:colorTextAbbBar}}>
               <div className='btnReturMensage'>
-                 <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white'}}/></IconButton>
+                 {userLogged && <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white'}}/></IconButton>}
               </div>
               <div className='btnReturMensageMobile' style={{justifyContent:'space-between',width:'100%'}}>
                   <div >
                     <IconButton onClick={voltar}><ArrowBackIosNew sx={{color:'white',margin:'10px 0px 0px -10px'}}/></IconButton>
                   </div>
                   <div  style={{display:'flex',justifyContent:'flex-end'}}>
-                    <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white',margin:'10px -8px 0px auto'}}/></IconButton>
+                    {userLogged && <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white',margin:'10px -8px 0px auto'}}/></IconButton>}
                   </div>
               </div>
               <h1 className='homeRightTitle'>{users.nome}</h1>
@@ -89,7 +100,35 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
                     <Avatar><CallIcon/></Avatar>
                   </div>
                   <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
-                    <Button variant='outlined' onClick={()=>setVisibleChat(false)}>mensagem</Button>
+                    {userLogged ?
+                       <Button variant='outlined' onClick={()=>setVisibleChat(false)}>mensagem</Button>:
+                       <div>
+                       <Button variant="outlined" onClick={handleClickOpen}>
+                       mensagem
+                       </Button>
+                       <Dialog
+                         open={open}
+                         onClose={handleClose}
+                         aria-labelledby="alert-dialog-title"
+                         aria-describedby="alert-dialog-description"
+                       >
+                         <DialogTitle id="alert-dialog-title">
+                           {"Ops!!!  Voçe não esta logado!"}
+                         </DialogTitle>
+                         <DialogContent>
+                           <DialogContentText id="alert-dialog-description">
+                              Você precisa estar logado para enviar mensagens
+                           </DialogContentText>
+                         </DialogContent>
+                         <DialogActions>
+                           <Button onClick={()=>navigate('/login')}>Login</Button>
+                           <Button onClick={handleClose} autoFocus>
+                             Fechar
+                           </Button>
+                         </DialogActions>
+                       </Dialog>
+                     </div>
+                    }
                     <Avatar><ChatIcon/></Avatar>
                   </div>
               </div>
