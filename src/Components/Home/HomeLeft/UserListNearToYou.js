@@ -92,40 +92,43 @@ export default function UsersListNearToYou() {
    }
   return (
     <div>
-        {loading && 
+        {loading ? 
             <Box sx={{ display: 'flex',justifyContent:'center',marginTop:'80px'}}>
               <CircularProgress />
-            </Box>
-        }
-              <FormControl sx={{width:'100%',display:'flex',justifyContent:"center"}}>
-                <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="female"
-                    name="radio-buttons-group"
-                    
-                  value={valueRadio}
-                  onChange={handleChangeRadio}
-                >
-                    <div style={{display:'flex',justifyContent:'flex-end',alignItems:'center',marginLeft:"9px"}}>
-                    {list.length > 10 && <FormLabel id="demo-radio-buttons-group-label" sx={{width:"100%"}}>Intervalo da lista</FormLabel>}
-                    {list.length > 10 && <FormControlLabel value={'5'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>5</div>} />}
-                    {list.length > 10 && <FormControlLabel value={'10'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>10</div>} />}
-                    {list.length > 15 && <FormControlLabel value={'15'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>15</div>} />}
-                    </div>
-                </RadioGroup>
-              </FormControl>
+            </Box>:
+            <div>
+                <FormControl sx={{width:'100%',display:'flex',justifyContent:"center"}}>
+                  <RadioGroup
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      defaultValue="female"
+                      name="radio-buttons-group"
+                      
+                    value={valueRadio}
+                    onChange={handleChangeRadio}
+                  >
+                      <div style={{display:'flex',justifyContent:'flex-end',alignItems:'center',marginLeft:"9px"}}>
+                      {list.length > 10 && <FormLabel id="demo-radio-buttons-group-label" sx={{width:"100%"}}>Intervalo da lista</FormLabel>}
+                      {list.length > 10 && <FormControlLabel value={'5'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>5</div>} />}
+                      {list.length > 10 && <FormControlLabel value={'10'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>10</div>} />}
+                      {list.length > 15 && <FormControlLabel value={'15'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>15</div>} />}
+                      </div>
+                  </RadioGroup>
+                </FormControl>
                 { filterPages.length > 0 ? 
                     <div>
                       {filterPages.map((elem,key)=>{
                         return <ItemList elem={elem} index={key} />
                       })}
                    </div>:
-                   <div id='naoEncontrado' style={{textAlign:'center',marginTop:"60px"}}>Não encontrado! </div>
+                   <div id='naoEncontrado' style={{textAlign:'center',marginTop:"60px",color:'gray'}}>Não encontrado! </div>
                 }
                 
                 <div style={{display:'flex',justifyContent:"center"}}>
                    {handleVisiblePagination() && <Pagination count={countPage} page={page} onChange={handleChange} color='secondary'/>}
                 </div>
+            </div>
+        }
+             
     </div>
   )
 }

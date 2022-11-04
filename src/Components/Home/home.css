@@ -29,7 +29,9 @@
    
 }
 .homeRightContainer{
-   
+   box-sizing: border-box;
+   width: 100%;
+  
 }
 .css-19kzrtu{
    
@@ -62,6 +64,7 @@
    justify-content: center;
    align-items: center;
    flex-direction: column;
+   
 }
 .homeRightAvatar{
    margin-bottom: -50px;
@@ -121,7 +124,19 @@
    font-size: 10px;
    margin-bottom: 5px;
 }
+.btnReturMensage{
+   display: flex;
+   width:98%;
+   justify-content:flex-end;
+   margin-top:10px;
+}
 @media (max-width:750px) {
+   .btnReturMensage{
+      display: none;
+   }
+   .homeRightHeader{
+      padding:0px 15px;
+   }
    .homeRightBody{
       grid-template-columns: 1fr;
       

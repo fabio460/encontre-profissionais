@@ -6,7 +6,7 @@ import { listType } from '../../../types'
 import { colorsLayout, colorTextAbbBar } from '../../../utils'
 import { initialsAvatar } from '../../../utils'
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import ChatIcon from '@mui/icons-material/Chat';
+
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import Diversity2Icon from '@mui/icons-material/Diversity2';
 import PersonIcon from '@mui/icons-material/Person';
@@ -20,8 +20,15 @@ import CallIcon from '@mui/icons-material/Call';
 import Diversity2 from '@mui/icons-material/Diversity2'
 import imagemUsers from '../../../images/users2.png'
 import Fab from '@mui/material/Fab';
-import Chat from './Chat'
-export default function HomeRight() {
+import ChatIcon from '@mui/icons-material/Chat';
+import ArrowBackIosNew from '@mui/icons-material/ArrowBackIosNew'
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+interface typeFunction{
+  setVisibleChat:any
+}
+export default function HomeRight({setVisibleChat}:typeFunction) {
   const dispatch = useDispatch()
 
   const voltar = ()=>{
@@ -38,20 +45,31 @@ export default function HomeRight() {
   const tamAvatar = "150px"
   const tamAvatar2 = "100px"
 
-  const [VisibleChat, setVisibleChat] = useState(false)
+  
   const handleVisibleChat = ()=>{
-    setVisibleChat(!VisibleChat)
+    
   }
 
   return (
     <div>
-      <div className='homeRightButtonReturn'>
-        <Button onClick={voltar} >voltar</Button>
-        <Button onClick={handleVisibleChat} >chat</Button>
-      </div>
+      {/* <div className='homeRightButtonReturn'>
+        <IconButton onClick={voltar} ><ArrowBackIosNew color='primary'/></IconButton>
+      </div> */}
       { users._id ?  
+      
          <div className='homeRightContainer' >
             <div className='homeRightHeader' style={{background:colorsLayout,color:colorTextAbbBar}}>
+              <div className='btnReturMensage'>
+                 <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white'}}/></IconButton>
+              </div>
+              <div style={{display:'flex',justifyContent:'space-between',width:'100%'}}>
+                  <div className='btnReturMensageMobile'>
+                    <IconButton onClick={voltar}><ArrowBackIosNew sx={{color:'white',margin:'10px 0px 0px -10px'}}/></IconButton>
+                  </div>
+                  <div className='btnReturMensageMobile' style={{display:'flex',justifyContent:'flex-end'}}>
+                    <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white',margin:'10px -8px 0px auto'}}/></IconButton>
+                  </div>
+              </div>
               <h1 className='homeRightTitle'>{users.nome}</h1>
               <div className='homeRightAvatar'>
                   <Avatar src={users.imagemPerfil}
@@ -70,7 +88,13 @@ export default function HomeRight() {
                     {users.telefone}
                     <Avatar><CallIcon/></Avatar>
                   </div>
+                  <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
+                    <Button variant='outlined' onClick={()=>setVisibleChat(false)}>mensagem</Button>
+                    <Avatar><ChatIcon/></Avatar>
+                  </div>
               </div>
+              
+         
               <div className='homeRightItems'>
                   <LocationCityIcon sx={{width:tamAvatar2,height:tamAvatar2, color:colorsLayout}}/>
                   <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
@@ -108,18 +132,18 @@ export default function HomeRight() {
                     }
               </div>
             </div>
-            {userLogged && <div className='chatContainer' >
+            {/* {userLogged && <div className='chatContainer' >
               <div className='chatBtn'>
                 <div style={{textAlign:"center"}}>Chat</div>
                 <Fab color='primary' onClick={handleVisibleChat}><ChatIcon/></Fab>
               </div>
               <div className={VisibleChat ? 'chat visibleChat' : 'chat'}><Chat/></div>
-            </div>}
+            </div>} */}
             
          </div>
          :
          <div className='homeRightEmpty'>
-            <h1>Nenhum profissional selecionado!</h1>
+            <h1 style={{color:'grey'}}>Nenhum profissional selecionado!</h1>
             <img src={imagemUsers}/>
    
          </div>

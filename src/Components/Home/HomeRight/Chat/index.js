@@ -6,10 +6,13 @@ import { useSelector } from 'react-redux';
 import firebaseConfig from './configFireBaseChats';
 import { initializeApp } from 'firebase/app';
 import IconButton from '@mui/material/IconButton';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import { Avatar } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-export default function Chat() {
+import Button from '@mui/material/Button'
+
+export default function Chat({setVisibleChat}) {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -130,7 +133,7 @@ const [Mensagens, setMensagens] = useState([])
   }
  
   return (
-    <div >
+    <div style={{display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100%',boxSizing:'border-box'}}>
       <div className='appBarChat'>
          <Avatar 
             sx={{marginRight:"10px",bgcolor:'#1976d2'}} 
@@ -142,73 +145,79 @@ const [Mensagens, setMensagens] = useState([])
             <div className='appBarChatTitle'>{userSelectedReducer.nome}</div>
             <div className='appBarChatItemProfissao'>{userSelectedReducer.profissao}</div>
          </div>
+         <IconButton variant='outlined' onClick={()=>setVisibleChat(true)} sx={{marginLeft:'auto'}}>
+           <ArrowBackIosNewIcon color='primary'/>
+         </IconButton>
       </div>
-      <div className='chatBody'>
-          
-          {Mensagens.map(e=>{
-            return <div className='chatOut'>
-                {userLogged.email === e.emailEmissor ? 
-                  <div className='emissor' >
-                    <div className='emissorAvatar'>
-                      
-                      <Avatar 
-                        src={userLoggedReducer.imagemPerfil}
-                        sx={{bgcolor:'#1976d2'}}    
-                      >
-                          {initialsAvatar(userLoggedReducer.nome)}
-                      </Avatar>
-                    </div>
-                    <div>
-                      <div style={{display:'flex',alignItems:'center'}}>
-                        <div className='emissorMensage'>{e.mensagem} </div>
-                        <span onClick={()=>deleteMensage(e.id)}
-                            style={{cursor:'pointer',marginLeft:"0px",marginRight:'0px'}}
+      
+      <div style={{position:'relative',bottom:'0px' ,display:"flex",flexDirection:"column",justifyContent:"space-between",background:'',padding:"10px"}}>
+          <div className='chatBody'>
+            
+              {Mensagens.map(e=>{
+                return <div className='chatOut'>
+                    {userLogged.email === e.emailEmissor ? 
+                      <div className='emissor' >
+                        <div className='emissorAvatar'>
+                          
+                          <Avatar 
+                            src={userLoggedReducer.imagemPerfil}
+                            sx={{bgcolor:'#1976d2'}}    
                           >
-                            <IconButton>
-                                <DeleteIcon color='error' sx={{width:'18px',height:'18px'}}/>
-                            </IconButton>
-                        </span>
-                        
-                      </div>
-                      <div className='emissorHora'>{e.hora && (e.hora).toString()}</div>
-                    </div>
-                  </div>:
-
-                  <div className='receptor' >
-                    <div>
-                        <div style={{display:'flex',alignItems:'center'}}>
-                            <span onClick={()=>deleteMensage(e.id)}
-                                    style={{marginLeft:"0px",marginRight:'0px',color:"black"}}
-                                  >
-                                    <IconButton>
-                                      <DeleteIcon color='error' sx={{width:'18px',height:'18px'}}/>
-                                    </IconButton>
-                              </span> 
-                              <div className='receptorMensage'> {e.mensagem}</div>
+                              {initialsAvatar(userLoggedReducer.nome)}
+                          </Avatar>
                         </div>
-                        <div className='receptorHora'>{e.hora && (e.hora).toString()}</div>
-                    </div>
-                    <div className='receptorAvatar'>
-                      
-                      <Avatar 
-                        src={userSelectedReducer.imagemPerfil}  
-                        sx={{bgcolor:'#1976d2'}} 
-                      >
-                        {initialsAvatar(userSelectedReducer.nome)}
-                      </Avatar>
-                    </div>
-                  </div>
-                }
-            </div>
-          })}
+                        <div>
+                          <div style={{display:'flex',alignItems:'center'}}>
+                            <div className='emissorMensage'>{e.mensagem} </div>
+                            <span onClick={()=>deleteMensage(e.id)}
+                                style={{cursor:'pointer',marginLeft:"0px",marginRight:'0px'}}
+                              >
+                                <IconButton>
+                                    <DeleteIcon color='error' sx={{width:'18px',height:'18px'}}/>
+                                </IconButton>
+                            </span>
+                            
+                          </div>
+                          <div className='emissorHora'>{e.hora && (e.hora).toString()}</div>
+                        </div>
+                      </div>:
 
+                      <div className='receptor' >
+                        <div>
+                            <div style={{display:'flex',alignItems:'center'}}>
+                                <span onClick={()=>deleteMensage(e.id)}
+                                        style={{marginLeft:"0px",marginRight:'0px',color:"black"}}
+                                      >
+                                        <IconButton>
+                                          <DeleteIcon color='error' sx={{width:'18px',height:'18px'}}/>
+                                        </IconButton>
+                                  </span> 
+                                  <div className='receptorMensage'> {e.mensagem}</div>
+                            </div>
+                            <div className='receptorHora'>{e.hora && (e.hora).toString()}</div>
+                        </div>
+                        <div className='receptorAvatar'>
+                          
+                          <Avatar 
+                            src={userSelectedReducer.imagemPerfil}  
+                            sx={{bgcolor:'#1976d2'}} 
+                          >
+                            {initialsAvatar(userSelectedReducer.nome)}
+                          </Avatar>
+                        </div>
+                      </div>
+                    }
+                </div>
+              })}
+          </div>
+          <div className='chatInput'>
+              <div className='chatInputContent' >
+                  <input className='inputSearchChat'  onKeyUp={setChatOnKeyUp} onChange={e=>setMensagem(e.target.value)} value={Mensagem}/>
+                  <IconButton onClick={setChat}  color="primary"><NearMeIcon/></IconButton>
+              </div>
+          </div>
       </div>
-      <div className='chatInput'>
-           <div className='chatInputContent' >
-              <input className='inputSearchChat'  onKeyUp={setChatOnKeyUp} onChange={e=>setMensagem(e.target.value)} value={Mensagem}/>
-              <IconButton onClick={setChat}  color="primary"><NearMeIcon/></IconButton>
-           </div>
-      </div>
+
     </div>
   )
 }

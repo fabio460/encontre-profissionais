@@ -6,6 +6,7 @@ import HomeRight from './HomeRight/HomeRight'
 import {useDispatch, useSelector} from 'react-redux'
 import { apiBase } from '../../utils'
 import { listType } from '../../types'
+import Chat from './HomeRight/Chat'
 
 export default function Home() {
   
@@ -14,7 +15,7 @@ export default function Home() {
   var user:listType = JSON.parse(localStorage.getItem('userLogged')||'null')  
   const dispatch = useDispatch()
 
-
+  const [VisibleChat, setVisibleChat] = useState(true)
   
   useEffect(()=>{
     if (user) {
@@ -42,7 +43,8 @@ export default function Home() {
             <HomeLeft />
           </div>
          <div className={`homeRight ${toRoll && 'rollHomeRight'}`} >
-            <HomeRight/>
+            {VisibleChat ? <HomeRight setVisibleChat={setVisibleChat}/>:  <Chat setVisibleChat={setVisibleChat}/>}
+           
          </div>
       </div>
     </div>

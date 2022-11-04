@@ -121,7 +121,7 @@ export default function UsersList() {
                         return <ItemList elem={elem} index={key} />
                       })}
                    </div>:
-                   <div id='naoEncontrado' style={{textAlign:'center',marginTop:"60px"}}>Não encontrado! </div>
+                   <div id='naoEncontrado' style={{textAlign:'center',marginTop:"60px",color:'grey'}}>Não encontrado! </div>
                 }
                 <div style={{display:'flex',justifyContent:"center"}}>
                    {handleVisiblePagination() && <Pagination count={countPage} page={page} onChange={handleChange} color='secondary'/>}

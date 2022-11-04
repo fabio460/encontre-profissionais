@@ -1,5 +1,5 @@
 .chat{
-    position: fixed;
+    /* position: relative;
     background-color: white;
     box-shadow: 2px 2px 5px  black;
     right: -100%;
@@ -7,13 +7,14 @@
     width: 400px;
     border-radius: 5px;
     transition: 0.2s;
-    padding: 3px;   
+    padding: 3px;    */
+    height: inherit;
 }
 
 .chatBody{    
-    margin-bottom: 40px;
+    margin-bottom: 15px;
     overflow-y: scroll;
-    height: 400px;
+    height: 100%;
     padding: 10px;
     transform: rotateX(180deg);
    
@@ -23,25 +24,31 @@
 }
 .inputSearchChat{
     outline: 0;
-    width: 80%;
+    width: 100%;
     background-color: rgb(229, 229, 254);
+    margin: 5px;
+    height: 30px;
+    font-size: large;
 }
 .chatInput{
-    position: absolute;
+    /* position: absolute;
     bottom: 0px;
     left: 0px;
     right: 0px;
     background-color: white;
     border-radius: 3px;
-    padding: 5px;
+    padding: 5px; */
     
 }
 .chatInputContent{
     background-color: rgb(229, 229, 254);
+    
     width: 90%;
     margin: auto;
     border-radius: 30px;
     padding: 0px 0px 0px 10px;
+    display: flex;
+    margin-bottom: 15px;
 }
 
 .chatBody::-webkit-scrollbar{
@@ -131,7 +138,14 @@
     font-size: 12px;
     color: gray;
 }
+.btnReturMensageMobile{
+    display: none;
+}
 @media (max-width:700px) {
+    .btnReturMensageMobile{
+        display: flex;
+        width: 100%;
+    }
     .visibleChat{
         width: 80%;
         right: 10%;
