@@ -156,4 +156,7 @@
     .chat{
         width: 80%;
     }
+    .chatBody{
+        max-height: 380px;
+    }
 }
