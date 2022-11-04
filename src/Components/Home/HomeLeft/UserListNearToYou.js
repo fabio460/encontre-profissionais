@@ -123,7 +123,7 @@ export default function UsersListNearToYou() {
                    <div id='naoEncontrado' style={{textAlign:'center',marginTop:"60px",color:'gray'}}>Não encontrado! </div>
                 }
                 
-                <div style={{display:'flex',justifyContent:"center"}}>
+                <div style={{display:'flex',justifyContent:"center",margin:'10px 0px'}}>
                    {handleVisiblePagination() && <Pagination count={countPage} page={page} onChange={handleChange} color='secondary'/>}
                 </div>
             </div>
