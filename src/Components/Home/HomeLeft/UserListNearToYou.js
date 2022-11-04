@@ -15,18 +15,21 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 export default function UsersListNearToYou() {
+
     const [loading, setLoading] = useState(true)
     const [list, setlist] = useState([])   
     var userLogged = JSON.parse(localStorage.getItem('userLogged')||'null')  
     let filterByName = []   
     const search = useSelector((state)=>state.inputSearchReducer.value)
     useEffect(() => {
+
       fetch(getUsuarios)
       .then(res=>res.json())
       .then(res=>{
-          
-          let auxList = res.filter((e)=>{
+          let auxList = res.filter((e,key)=>{
             if (e.bairro === userLogged.bairro && e._id !== userLogged._id) {
+
+                // console.log({e,msg:key})
                 return e
             }
           })
@@ -34,8 +37,6 @@ export default function UsersListNearToYou() {
           setlist(auxList)
           setLoading(false)
       })
-
-      
     }, [])
     
     let primeiraLetraMaiouscula = search.slice(0,1).toLocaleUpperCase()

@@ -7,9 +7,12 @@ import {useDispatch, useSelector} from 'react-redux'
 import { apiBase } from '../../utils'
 import { listType } from '../../types'
 import Chat from './HomeRight/Chat'
-
+import { initializeApp } from "firebase/app";
+import { collection, doc, getFirestore, onSnapshot, query, where } from "firebase/firestore"; 
+import firebaseConfig from './HomeRight/Chat/configFireBaseChats'
 export default function Home() {
-  
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
   // esta função rola a tela no mobile, intercalando os layouts homeleft e homeright controlada pelo reducer 
   const toRoll = useSelector<any,boolean>(state=>state.FunctionsRedcer.toRoll)
   var user:listType = JSON.parse(localStorage.getItem('userLogged')||'null')  
@@ -30,8 +33,23 @@ export default function Home() {
             payload:{userLogged:res[0]}
           })
       })
-    }
 
+    onSnapshot(query(collection(db,"chat"),
+      where("lida","==","true"),
+      where("emailReceptor","==",user.email),
+      // where("emailEmissor","==",e.email)
+      ), (doc) => {
+      let aux:Object[] = []  
+      doc.forEach(elem=>{
+          aux.push(elem.data())
+      })
+      dispatch({
+        type:'msgRecebidas',
+        payload:{msgRecebidas:aux}
+      })
+    });
+    }
+    
   },[])
 
   return (

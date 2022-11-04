@@ -15,6 +15,7 @@ import {  useNavigate } from 'react-router-dom';
 import { apiBase, colorsLayout, initialsAvatar } from '../../../utils';
 import { listType } from '../../../types';
 import { useDispatch } from 'react-redux';
+import MensagensRecebidas from './MensagensRecebidas';
 
 export default function MenuItensWeb() {
   interface typeLocalStotage{
@@ -72,9 +73,10 @@ export default function MenuItensWeb() {
   }
   return (
     <React.Fragment>
+     
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Typography sx={{ minWidth: 100 }}>Contact</Typography>
-        <Typography sx={{ minWidth: 100 }}>Profile</Typography>
+        <Typography sx={{ minWidth: 100 }}> <MensagensRecebidas/></Typography>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -90,6 +92,7 @@ export default function MenuItensWeb() {
           </IconButton>
         </Tooltip>
       </Box>
+      
       <Menu
         anchorEl={anchorEl}
         id="account-menu"

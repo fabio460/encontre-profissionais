@@ -16,7 +16,8 @@ import { listType } from '../../../types';
 import { apiBase, colorsLayout, initialsAvatar } from '../../../utils';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
+import MensagensRecebidas from './MensagensRecebidas';
+import Typography from '@mui/material/Typography';
 export default function MenuItensMobile() {
   var userLogged:listType = JSON.parse(localStorage.getItem('userLogged')||'null')   
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -71,7 +72,7 @@ export default function MenuItensMobile() {
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-       
+      <Typography sx={{ minWidth: 100 }}> <MensagensRecebidas/></Typography>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
