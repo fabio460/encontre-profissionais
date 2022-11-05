@@ -10,10 +10,10 @@ import firebaseConfig from '../HomeRight/Chat/configFireBaseChats'
 interface PropsType {
     elem:listType,
     index:number,
-    
+    mensagensRecebidas:any   
 }
 
-export default function ListItens({elem,index}:PropsType) {
+export default function ListItens({elem,index,mensagensRecebidas}:PropsType) {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const dispatch = useDispatch()
@@ -27,11 +27,15 @@ export default function ListItens({elem,index}:PropsType) {
           index:index        
         }
       })
-
-      
   }
   const selectIndex = useSelector<any,number>(state=>state.FunctionsRedcer.index) 
-   
+  
+  // const quant = mensagensRecebidas.filter((e:any)=>{
+  //   if (e.emailEmissor === elem.email) {
+  //     return  e
+  //   }
+  // })
+ 
   return(
     <ListItemButton selected={selectIndex === index && true} onClick={getIdUsers} className='ListItens' id={index.toString()}>
       <Avatar src={elem.imagemPerfil} sx={{bgcolor:ramdomColors(),marginRight:'10px'}} >{initialsAvatar(elem.nome)}</Avatar>
@@ -40,7 +44,16 @@ export default function ListItens({elem,index}:PropsType) {
          <div style={{color:'grey',fontSize:'13px'}}>{elem.profissao}</div>
          <div style={{color:'grey',fontSize:'13px'}}>{elem.bairro}</div>
       </div>
-      <div className='lida' id={elem.email}></div>
+
+      <div className='lida' id={elem.email}>
+         {mensagensRecebidas.length > 0 && 
+            <div className='lidaBody'>
+               <div className='lidaLength'>{mensagensRecebidas.length}</div>
+               <div className='lidaHoras'>{mensagensRecebidas[mensagensRecebidas.length - 1].hora}</div>
+            </div>
+         }
+
+      </div>
     </ListItemButton>
   )
 }

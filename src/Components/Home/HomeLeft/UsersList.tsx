@@ -18,6 +18,7 @@ export default function UsersList() {
     var userLogged:listType = JSON.parse(localStorage.getItem('userLogged')||'null')  
     let filterByName = []
     const search = useSelector((state:{inputSearchReducer:any,value:string})=>state.inputSearchReducer.value)
+    const mensagensRecebidas = useSelector((state:any)=>state.MensagensRecebidasReducer.msgRecebidas)
     useEffect(() => {
       fetch(getUsuarios)
       .then(res=>res.json())
@@ -120,7 +121,12 @@ export default function UsersList() {
               { filterPages.length > 0 ? 
                     <div>
                       {filterPages.map((elem,key)=>{
-                        return <ItemList elem={elem} index={key} />
+                        let m =  mensagensRecebidas.filter((msg:any)=>{
+                          if (msg.emailEmissor === elem.email) {
+                            return msg
+                          }
+                        })
+                        return <ItemList elem={elem} index={key} mensagensRecebidas={m}/>
                       })}
                    </div>:
                    <div id='naoEncontrado' style={{textAlign:'center',marginTop:"60px",color:'grey'}}>Não encontrado! </div>

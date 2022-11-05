@@ -77,7 +77,7 @@ const fabGreenStyle = {
 export default function HomeLeft() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };

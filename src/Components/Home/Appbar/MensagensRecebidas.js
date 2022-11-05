@@ -13,7 +13,8 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Badge from '@mui/material/Badge';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { apiBase } from '../../../utils';
 export default function MensagensRecebidas({marginLeft}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -23,9 +24,25 @@ export default function MensagensRecebidas({marginLeft}) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const dispatch = useDispatch()
   const mensagensRecebidas = useSelector(state=>state.MensagensRecebidasReducer.msgRecebidas)
+  const getUserMensage=async(Email)=>{
 
+    const formdataEmail = new FormData()
+    formdataEmail.append('email',Email)
+    const usuarioExistente =await fetch(apiBase+'getUsuarioPorEmail',{
+        method:'post',
+        body:formdataEmail
+    }).then(res=>res.json()).catch(res=> null)
+    dispatch({
+      type:'functions',
+      payload:{
+        getUsuariosReducer:usuarioExistente[0],
+        toRoll:true,
+        index:0        
+      }
+    })
+  }
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center',marginLeft }}>
@@ -86,7 +103,7 @@ export default function MensagensRecebidas({marginLeft}) {
         
         {mensagensRecebidas.map((elem,key)=>{
             return <div>
-                <MenuItem>
+                <MenuItem onClick={()=> getUserMensage(elem.emailEmissor)}>
                     <ListItemIcon>
                         <PersonAdd fontSize="small" />
                     </ListItemIcon>

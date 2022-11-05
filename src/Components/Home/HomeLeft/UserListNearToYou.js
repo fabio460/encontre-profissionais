@@ -19,7 +19,7 @@ export default function UsersListNearToYou() {
    
     const [loading, setLoading] = useState(true)
     const [list, setlist] = useState([])   
-    const [teste, setTeste] = useState([]) 
+    const [totalList, settotalList] = useState([]) 
     var userLogged = JSON.parse(localStorage.getItem('userLogged')||'null')  
     let filterByName = []   
     const search = useSelector((state)=>state.inputSearchReducer.value)
@@ -29,7 +29,7 @@ export default function UsersListNearToYou() {
       .then(res=>{
           let auxList = res.filter((e,key)=>{
             if (e.bairro === userLogged.bairro && e._id !== userLogged._id) {
-                return null
+                return e
             }
           })
          
@@ -46,18 +46,18 @@ export default function UsersListNearToYou() {
             }
           })
          
-          setTeste({users:auxList,msg:mensagensRecebidas})
+          settotalList({users:auxList,msg:mensagensRecebidas})
           setLoading(false)
       })
-    }, [mensagensRecebidas])
+    }, [])
     
     let primeiraLetraMaiouscula = search.slice(0,1).toLocaleUpperCase()
     let primeiraLetraMinuscula = search.slice(0,1).toLocaleLowerCase()
     let restante = search.slice(1)
     let maiusculo = primeiraLetraMaiouscula+restante
     let minusculo = primeiraLetraMinuscula+restante
-    //console.log(teste)
-    filterByName =teste.users && teste.users.filter((item)=>{
+ 
+    filterByName =list.filter((item)=>{
       if  (
            (item.nome.includes(maiusculo) ||item.profissao.includes(maiusculo)) ||
            (item.nome.includes(minusculo) ||item.profissao.includes(minusculo))
@@ -74,8 +74,8 @@ export default function UsersListNearToYou() {
     let initial = page*n - n
     let final = page*n-1
   
-    let countPage =filterByName && Math.ceil(filterByName.length/n)
-    const filterPages =filterByName && filterByName.filter((e,key)=>{
+    let countPage = Math.ceil(filterByName.length/n)
+    const filterPages = filterByName.filter((e,key)=>{
       if (key >= initial && key <= final ) {
         return e
       }
@@ -88,31 +88,13 @@ export default function UsersListNearToYou() {
      setPage(1)
    },[search])
 
-   
-   function setNotifications() {
-    document.querySelectorAll('.lida').forEach(div=>{
-      div.innerHTML=''
-      let m = mensagensRecebidas.filter((msg,key)=>{
-        if (div.id === msg.emailEmissor) {
-          return msg
-        }
-      })
-      if (m.length > 0) {
-        div.innerHTML=m.length   
-      }
-     })
-   }
-
-   useEffect(()=>{
-    setNotifications()
-   },[page,mensagensRecebidas])
- 
+    
    const handleChangeRadio = (event) => {
      setValue(event.target.value);
    };
     
    function handleVisiblePagination() {
-      if (filterPages && filterPages.length >= 5 ) {
+      if (filterPages.length >= 5 ) {
         return true
       }else{
         if (page !== 1) {
@@ -146,10 +128,15 @@ export default function UsersListNearToYou() {
                       </div>
                   </RadioGroup>
                 </FormControl>
-                {filterPages && filterPages.length > 0 ? 
+                { filterPages.length > 0 ? 
                     <div>
                       {filterPages.map((elem,key)=>{
-                        return <ItemList elem={elem} index={key} />
+                        let m =  mensagensRecebidas.filter(msg=>{
+                              if (msg.emailEmissor === elem.email) {
+                                return msg
+                              }
+                            })
+                        return <ItemList elem={elem} index={key} mensagensRecebidas={m}/>
                       })}
                    </div>:
                    <div id='naoEncontrado' style={{textAlign:'center',marginTop:"60px",color:'gray'}}>Não encontrado! </div>
