@@ -27,22 +27,7 @@ export default function ListItens({elem,index}:PropsType) {
           index:index        
         }
       })
-      if (user) {
-        const q = query(collection(db, "chat"),
-           where("emailEmissor", "==", elem.email),
-           where("lida", "==", "true"),
-           where("emailReceptor","==",user.email),
-        );
-        onSnapshot(q,async (querySnapshot) => {
-         const cities:Object[] = [];
-         querySnapshot.forEach((document) => {
-             const cityRef = doc(db, 'chat', (document.data().id).toString());
-              updateDoc(cityRef, {
-                 lida: "false"
-             });
-         });
-       });
-      }
+
       
   }
   const selectIndex = useSelector<any,number>(state=>state.FunctionsRedcer.index) 

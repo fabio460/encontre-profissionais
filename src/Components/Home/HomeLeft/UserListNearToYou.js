@@ -9,43 +9,55 @@ import { useSelector } from 'react-redux';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 
-
+import { collection, query, where, onSnapshot, getFirestore, doc, updateDoc } from "firebase/firestore";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 export default function UsersListNearToYou() {
-
+    const mensagensRecebidas = useSelector(state=>state.MensagensRecebidasReducer.msgRecebidas)
+   
     const [loading, setLoading] = useState(true)
     const [list, setlist] = useState([])   
+    const [teste, setTeste] = useState([]) 
     var userLogged = JSON.parse(localStorage.getItem('userLogged')||'null')  
     let filterByName = []   
     const search = useSelector((state)=>state.inputSearchReducer.value)
     useEffect(() => {
-
       fetch(getUsuarios)
       .then(res=>res.json())
       .then(res=>{
           let auxList = res.filter((e,key)=>{
             if (e.bairro === userLogged.bairro && e._id !== userLogged._id) {
-
-                // console.log({e,msg:key})
-                return e
+                return null
             }
           })
          
           setlist(auxList)
           setLoading(false)
       })
-    }, [])
+
+      fetch(getUsuarios)
+      .then(res=>res.json())
+      .then(res=>{
+          let auxList = res.filter((e,key)=>{
+            if (e.bairro === userLogged.bairro && e._id !== userLogged._id) {
+                return e
+            }
+          })
+         
+          setTeste({users:auxList,msg:mensagensRecebidas})
+          setLoading(false)
+      })
+    }, [mensagensRecebidas])
     
     let primeiraLetraMaiouscula = search.slice(0,1).toLocaleUpperCase()
     let primeiraLetraMinuscula = search.slice(0,1).toLocaleLowerCase()
     let restante = search.slice(1)
     let maiusculo = primeiraLetraMaiouscula+restante
     let minusculo = primeiraLetraMinuscula+restante
-
-    filterByName = list.filter((item)=>{
+    //console.log(teste)
+    filterByName =teste.users && teste.users.filter((item)=>{
       if  (
            (item.nome.includes(maiusculo) ||item.profissao.includes(maiusculo)) ||
            (item.nome.includes(minusculo) ||item.profissao.includes(minusculo))
@@ -62,8 +74,8 @@ export default function UsersListNearToYou() {
     let initial = page*n - n
     let final = page*n-1
   
-    let countPage = Math.ceil(filterByName.length/n)
-    const filterPages = filterByName.filter((e,key)=>{
+    let countPage =filterByName && Math.ceil(filterByName.length/n)
+    const filterPages =filterByName && filterByName.filter((e,key)=>{
       if (key >= initial && key <= final ) {
         return e
       }
@@ -75,13 +87,32 @@ export default function UsersListNearToYou() {
    useEffect(()=>{
      setPage(1)
    },[search])
+
+   
+   function setNotifications() {
+    document.querySelectorAll('.lida').forEach(div=>{
+      div.innerHTML=''
+      let m = mensagensRecebidas.filter((msg,key)=>{
+        if (div.id === msg.emailEmissor) {
+          return msg
+        }
+      })
+      if (m.length > 0) {
+        div.innerHTML=m.length   
+      }
+     })
+   }
+
+   useEffect(()=>{
+    setNotifications()
+   },[page,mensagensRecebidas])
  
    const handleChangeRadio = (event) => {
      setValue(event.target.value);
    };
     
    function handleVisiblePagination() {
-      if ( filterPages.length >= 5 ) {
+      if (filterPages && filterPages.length >= 5 ) {
         return true
       }else{
         if (page !== 1) {
@@ -115,7 +146,7 @@ export default function UsersListNearToYou() {
                       </div>
                   </RadioGroup>
                 </FormControl>
-                { filterPages.length > 0 ? 
+                {filterPages && filterPages.length > 0 ? 
                     <div>
                       {filterPages.map((elem,key)=>{
                         return <ItemList elem={elem} index={key} />

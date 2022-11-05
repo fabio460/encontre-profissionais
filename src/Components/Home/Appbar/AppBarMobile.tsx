@@ -13,6 +13,7 @@ export default function AppBarMobile() {
        </div>
        
        <div className='homeAppBarRight'>
+          
           <MenuItensMobile/>
        </div>
     </div>

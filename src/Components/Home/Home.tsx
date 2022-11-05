@@ -52,6 +52,15 @@ export default function Home() {
     
   },[])
 
+  interface typeMensagensRecebidas{
+    MensagensRecebidasReducer:{
+      msgRecebidas:Object[]
+    }
+ }
+//  const mensagensRecebidas = useSelector((state:typeMensagensRecebidas)=>state.MensagensRecebidasReducer.msgRecebidas)
+//  console.log(mensagensRecebidas)
+
+
   return (
     <div className='home'>
       <div>{}</div>

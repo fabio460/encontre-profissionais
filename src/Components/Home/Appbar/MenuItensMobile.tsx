@@ -72,7 +72,7 @@ export default function MenuItensMobile() {
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-      <Typography sx={{ minWidth: 100 }}> <MensagensRecebidas/></Typography>
+      
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -133,9 +133,9 @@ export default function MenuItensMobile() {
         <Divider />
         <MenuItem>
           <ListItemIcon>
-            <PersonAdd fontSize="small" />
+             <MensagensRecebidas marginLeft={-3}/>
           </ListItemIcon>
-          Add another account
+          Notificações
         </MenuItem>
         <MenuItem>
           <ListItemIcon>

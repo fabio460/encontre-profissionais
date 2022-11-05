@@ -115,30 +115,30 @@ export default function HomeLeft() {
 
   const [lido,setLido]= useState()
 
-  const aux = [];
-  useEffect(()=>{
-     if(user){
-      setTimeout(() => {
-        document.querySelectorAll('.lida').forEach(async e=>{ 
-          const Q = query(collection(db, "chat"), 
-            where("emailEmissor", "==", e.id),
-            where("lida", "==", "true"),
-            where("emailReceptor","==",user.email)
-            );
-          const tam = await getDocs(Q)
-          onSnapshot(Q,async (querySnapshot) => {
-            querySnapshot.forEach( (doc) => {
-                aux.push(doc.data());
-                setLido(tam.size)
+  // const aux = [];
+  // useEffect(()=>{
+  //    if(user){
+  //     setTimeout(() => {
+  //       document.querySelectorAll('.lida').forEach(async e=>{ 
+  //         const Q = query(collection(db, "chat"), 
+  //           where("emailEmissor", "==", e.id),
+  //           where("lida", "==", "true"),
+  //           where("emailReceptor","==",user.email)
+  //           );
+  //         const tam = await getDocs(Q)
+  //         onSnapshot(Q,async (querySnapshot) => {
+  //           querySnapshot.forEach( (doc) => {
+  //               aux.push(doc.data());
+  //               setLido(tam.size)
                 
-                if(tam.size > 0 ) e.innerHTML ='<div> <div class=horaMensage>'+doc.data().hora +'</div>  <div class=quantMensage>' + tam.size +  '</div>  </div>'
-            });
-          });
-        })
+  //               if(tam.size > 0 ) e.innerHTML ='<div> <div class=horaMensage>'+doc.data().hora +'</div>  <div class=quantMensage>' + tam.size +  '</div>  </div>'
+  //           });
+  //         });
+  //       })
       
-      }, 1500);
-     }
-  },[userSelected,aux,db,btnUpdate])
+  //     }, 1500);
+  //    }
+  // },[userSelected,aux,db,btnUpdate])
  
  
   return (

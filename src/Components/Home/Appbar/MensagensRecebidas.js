@@ -14,7 +14,7 @@ import Logout from '@mui/icons-material/Logout';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Badge from '@mui/material/Badge';
 import { useSelector } from 'react-redux';
-export default function MensagensRecebidas() {
+export default function MensagensRecebidas({marginLeft}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -25,13 +25,12 @@ export default function MensagensRecebidas() {
   };
 
   const mensagensRecebidas = useSelector(state=>state.MensagensRecebidasReducer.msgRecebidas)
-  console.log(mensagensRecebidas)
+
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Typography sx={{ minWidth: 100 }}>Contact</Typography>
-        <Typography sx={{ minWidth: 100 }}>Profile</Typography>
-        <Tooltip title="Voçê tem mensagens recebidas">
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center',marginLeft }}>
+   
+        <Tooltip title="Voçê tem mensagens recebidas" >
           <IconButton
             onClick={handleClick}
             size="small"
@@ -39,6 +38,7 @@ export default function MensagensRecebidas() {
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
+
           >
         
             <Badge badgeContent={mensagensRecebidas.length} color="primary">

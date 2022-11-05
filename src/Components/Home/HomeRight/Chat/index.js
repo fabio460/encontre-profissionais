@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import './chat.css'
-import { collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, orderBy, query, setDoc, updateDoc } from "firebase/firestore"; 
+import { collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, orderBy, query, setDoc, updateDoc, where } from "firebase/firestore"; 
 import {colorBackGround,initialsAvatar} from '../../../../utils'
 import { useSelector } from 'react-redux';
 import firebaseConfig from './configFireBaseChats';
@@ -18,12 +18,33 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const userLoggedReducer = useSelector((state)=>state.UserLoggedReducer.userLogged)
- const userSelectedReducer = useSelector(state=>state.FunctionsRedcer.getUsuariosReducer) 
+const userSelectedReducer = useSelector(state=>state.FunctionsRedcer.getUsuariosReducer) 
 var userLogged = JSON.parse(localStorage.getItem('userLogged')||'null')  
-
 const userSelected = useSelector(state=>state.FunctionsRedcer.getUsuariosReducer) 
 const [Mensagem, setMensagem] = useState('')
 const [Mensagens, setMensagens] = useState([])
+
+
+useEffect(()=>{
+ 
+  if (userLogged) {
+    const q = query(collection(db, "chat"),
+       where("emailEmissor", "==", userSelectedReducer.email),
+       where("lida", "==", "true"),
+       where("emailReceptor","==",userLoggedReducer.email),
+    );
+    onSnapshot(q,async (querySnapshot) => {
+     const cities = [];
+     
+     querySnapshot.forEach((document) => {
+         const cityRef = doc(db, 'chat', (document.data().id).toString());
+          updateDoc(cityRef, {
+             lida: "false"
+         });
+     });
+   });
+  }
+},[userSelectedReducer])
   
   const setChat = async()=>{
       const querySnapshot = await getDocs(query(collection(db, "chat"),orderBy('id')));
