@@ -142,7 +142,9 @@ export default function Register() {
             
             <div className='registerleft'></div>
             <div className='registerRight'>
-
+                <div>
+                    <Button onClick={()=> navigate('/')}>home</Button>
+                </div>
                 {key === 1  ?
                   <div className='forms'>
                     <div>

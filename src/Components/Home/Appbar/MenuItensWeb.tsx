@@ -134,15 +134,13 @@ export default function MenuItensWeb() {
             </Avatar>
             {userLogged ?  UserLoggedApi?.nome : "Usuario"}
         </MenuItem>
-        {userLogged && <MenuItem >
-          <Avatar /> Minha conta
-        </MenuItem>}
+    
         <Divider />
-        <MenuItem>
-          <ListItemIcon>
+        <MenuItem onClick={()=>navigate('/register')}>
+          <ListItemIcon >
             <PersonAdd fontSize="small" />
           </ListItemIcon>
-          Add another account
+          Adicionar outra conta
         </MenuItem>
         <MenuItem>
           <ListItemIcon>

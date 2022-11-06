@@ -127,10 +127,7 @@ export default function MenuItensMobile() {
             </Avatar>
             {userLogged ?  UserLoggedApi?.nome : "Usuario"}
         </MenuItem>
-        {userLogged && 
-          <MenuItem >
-            <Avatar /> Minha conta
-          </MenuItem>}
+      
         <Divider />
         <MenuItem>
           <ListItemIcon>
@@ -138,11 +135,11 @@ export default function MenuItensMobile() {
           </ListItemIcon>
           Notificações
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={()=>navigate('/register')}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <PersonAdd fontSize="small" />
           </ListItemIcon>
-          Settings
+          Adicionar outra conta
         </MenuItem>
 
         {!localStorage.getItem('userLogged')?
