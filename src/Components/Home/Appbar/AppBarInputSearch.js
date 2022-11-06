@@ -12,6 +12,20 @@ export default function AppBarInputSearch() {
     type:'search',
     payload:{value:Search}
   })
+
+  const inputHidden = ()=>{
+    dispatch({
+      type:'inputVisible',
+      payload:{inputVisible:true}
+    })
+  }
+
+  const inputVisible = ()=>{
+    dispatch({
+      type:'inputVisible',
+      payload:{inputVisible:false}
+    })
+  }
   return (
     <div>
         <Paper sx={{boxShadow:'none',bgcolor:colorsLayout}}>
@@ -22,6 +36,8 @@ export default function AppBarInputSearch() {
                 inputProps={{ 'aria-label': 'search google maps' }}
                 value={Search}
                 onChange={e=> setSearch(e.target.value)}
+                onFocus={inputVisible}
+                onBlur={inputHidden}
             />
             <IconButton
               type="button"

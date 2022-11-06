@@ -6,6 +6,7 @@ import ValidationFormReducer from './ValidationFormReducer'
 import UserLoggedReducer from './userLoggedReducer'
 import inputSearchReducer from './inputSearchReducer'
 import MensagensRecebidasReducer from './MensagensRecebidasReducer'
+import AppBarVisibleReducer from './AppBarVisibleReducer'
 
 export default configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export default configureStore({
     InputsObjectsReducer,
     UserLoggedReducer,
     inputSearchReducer,
-    MensagensRecebidasReducer
+    MensagensRecebidasReducer,
+    AppBarVisibleReducer
   },
 })

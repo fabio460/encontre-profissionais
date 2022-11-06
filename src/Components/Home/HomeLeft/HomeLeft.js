@@ -91,71 +91,56 @@ export default function HomeLeft() {
     exit: theme.transitions.duration.leavingScreen,
   };
 
-  const fabs = [
-    {
-      // color: 'primary',
-      // sx: fabStyle,
-      // icon: <AddIcon />,
-      // label: 'Add',
-    },
-    {
-      // color: 'secondary',
-      // sx: fabStyle,
-      // icon: <EditIcon />,
-      // label: 'Edit',
-    },
-  ];
-
   const btnUpdate = useSelector(state=>state.BtnUpdateReducer.btnUpdate)
   const userSelected = useSelector(state=>state.FunctionsRedcer.getUsuariosReducer) 
-
   var user = JSON.parse(localStorage.getItem('userLogged')||'null') 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-
   const [lido,setLido]= useState()
+  const inputVisible = useSelector((state)=>state.AppBarVisibleReducer.inputVisible)
+  
+  const BoxStyle ={
+    bgcolor: 'background.paper',
+    width: '100%',
+    position: 'relative',
+    minHeight: '100%',
+    borderRadius:'5px',
+    transitions:'0.5s',
+    
+    "@media (max-width:750px)":{
+      position:inputVisible ? 'relative' : 'fixed',
+      top:0,
+      transitions:'0.5s',
+    }
+  }
 
-  // const aux = [];
-  // useEffect(()=>{
-  //    if(user){
-  //     setTimeout(() => {
-  //       document.querySelectorAll('.lida').forEach(async e=>{ 
-  //         const Q = query(collection(db, "chat"), 
-  //           where("emailEmissor", "==", e.id),
-  //           where("lida", "==", "true"),
-  //           where("emailReceptor","==",user.email)
-  //           );
-  //         const tam = await getDocs(Q)
-  //         onSnapshot(Q,async (querySnapshot) => {
-  //           querySnapshot.forEach( (doc) => {
-  //               aux.push(doc.data());
-  //               setLido(tam.size)
-                
-  //               if(tam.size > 0 ) e.innerHTML ='<div> <div class=horaMensage>'+doc.data().hora +'</div>  <div class=quantMensage>' + tam.size +  '</div>  </div>'
-  //           });
-  //         });
-  //       })
-      
-  //     }, 1500);
-  //    }
-  // },[userSelected,aux,db,btnUpdate])
- 
- 
+  const AppBarStyle ={
+    bgcolor:colorsLayout,
+    boxShadow:'none',
+    color:'white',
+    transitions:'0.5s',
+    "@media (max-width:750px)":{
+      display:inputVisible ? "block" : 'none',
+      transitions:'0.5s',
+    }
+    
+  }
+
+  const TabPanelStyle = {
+    height:'calc(100vh - 252px)',
+    "@media (max-width:750px)":{
+      height:!inputVisible && 'calc(100vh - 52px)',
+    }
+  }
   return (
     <Box
-      sx={{
-        bgcolor: 'background.paper',
-        width: '100%',
-        position: 'relative',
-        minHeight: '100%',
-        borderRadius:'5px'
-      }}
+      sx={BoxStyle}
     >
       
       <div style={{background:colorsLayout,borderTopRightRadius:'20px',borderTopLeftRadius:'20px'}}>
          <AppBarInputSearch/>
       </div>
-      <AppBar position="static" sx={{bgcolor:colorsLayout,boxShadow:'none',color:'white'}}>
+      <AppBar position="static"  sx={AppBarStyle}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -174,11 +159,11 @@ export default function HomeLeft() {
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
-       
+        
       >
         <TabPanel value={value} index={0} dir={theme.direction}
             className='TabPainel'
-            sx={{height:'calc(100vh - 252px)'}}
+            sx={TabPanelStyle}
         > 
           {
             localStorage.getItem('userLogged')?
@@ -191,7 +176,7 @@ export default function HomeLeft() {
 
         <TabPanel value={value} index={1} dir={theme.direction}
            className='TabPainel'
-           sx={{height:'calc(100vh - 252px)'}}
+           sx={TabPanelStyle}
         >
           
            <UsersList/>
@@ -199,7 +184,7 @@ export default function HomeLeft() {
 
         <TabPanel value={value} index={2} dir={theme.direction}
             className='TabPainel'
-            sx={{height:'calc(100vh - 252px)'}}
+            sx={TabPanelStyle}
         >
            
             {btnUpdate?

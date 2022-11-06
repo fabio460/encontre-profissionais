@@ -3,6 +3,7 @@ import './AppBar.css'
 import AppBarWeb from './AppBarWeb';
 import AppBarMobile from './AppBarMobile';
 import { backgoundAppBar, colorTextAbbBar } from '../../../utils';
+import { useSelector } from 'react-redux';
 export default function AppBar() {
 
   return (

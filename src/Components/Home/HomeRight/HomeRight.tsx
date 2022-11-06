@@ -95,10 +95,11 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
                     {users.email}
                     <Avatar><EmailIcon/></Avatar>
                   </div>
-                  <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
-                    {users.telefone}
-                    <Avatar><CallIcon/></Avatar>
-                  </div>
+                  {users.telefone && <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
+                      {users.telefone}
+                      <Avatar><CallIcon/></Avatar>
+                    </div>
+                  }
                   <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
                     {userLogged ?
                        <Button variant='outlined' onClick={()=>setVisibleChat(false)}>mensagem</Button>:
