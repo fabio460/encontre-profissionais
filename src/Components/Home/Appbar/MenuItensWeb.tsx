@@ -76,7 +76,7 @@ export default function MenuItensWeb() {
      
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Typography sx={{ minWidth: 100 }}>Contact</Typography>
-        <Typography sx={{ minWidth: 100 }}> <MensagensRecebidas marginLeft={7}/></Typography>
+        <Typography sx={{ minWidth: 100 }}> <MensagensRecebidas marginLeft={7} Close={handleClose}/></Typography>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}

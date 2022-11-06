@@ -27,23 +27,23 @@ const [Mensagens, setMensagens] = useState([])
 
 useEffect(()=>{
  
-  if (userLogged) {
+  async function updateNotifications() {
     const q = query(collection(db, "chat"),
        where("emailEmissor", "==", userSelectedReducer.email),
        where("lida", "==", "true"),
        where("emailReceptor","==",userLoggedReducer.email),
     );
-    onSnapshot(q,async (querySnapshot) => {
-     const cities = [];
-     
-     querySnapshot.forEach((document) => {
-         const cityRef = doc(db, 'chat', (document.data().id).toString());
-          updateDoc(cityRef, {
-             lida: "false"
-         });
-     });
-   });
+    const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((d) => {
+        console.log(d.data().id)
+        const cityRef = doc(db, 'chat', (d.data().id).toString());
+        updateDoc(cityRef, {
+           lida: "false"
+       });
+    });    
   }
+  updateNotifications()
+ 
 },[userSelectedReducer])
   
   const setChat = async()=>{

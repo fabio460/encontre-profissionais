@@ -133,7 +133,7 @@ export default function MenuItensMobile() {
         <Divider />
         <MenuItem>
           <ListItemIcon>
-             <MensagensRecebidas marginLeft={-3}/>
+             <MensagensRecebidas marginLeft={-3} Close={handleClose}/>
           </ListItemIcon>
           Notificações
         </MenuItem>

@@ -15,7 +15,7 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Badge from '@mui/material/Badge';
 import { useDispatch, useSelector } from 'react-redux';
 import { apiBase } from '../../../utils';
-export default function MensagensRecebidas({marginLeft}) {
+export default function MensagensRecebidas({marginLeft,Close}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -42,7 +42,14 @@ export default function MensagensRecebidas({marginLeft}) {
         index:0        
       }
     })
+    Close()
   }
+  // let aux = []
+  // mensagensRecebidas.forEach(e=>{
+  //   aux.push(e.emissor)
+  //   aux = aux.sort()
+  // })
+  // console.log(aux)
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center',marginLeft }}>
@@ -102,6 +109,8 @@ export default function MensagensRecebidas({marginLeft}) {
     
         
         {mensagensRecebidas.map((elem,key)=>{
+  
+           
             return <div>
                 <MenuItem onClick={()=> getUserMensage(elem.emailEmissor)}>
                     <ListItemIcon>
@@ -111,6 +120,7 @@ export default function MensagensRecebidas({marginLeft}) {
                 </MenuItem>
             </div> 
         })}
+       
       </Menu>
     </React.Fragment>
   );
