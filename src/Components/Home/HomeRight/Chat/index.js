@@ -35,7 +35,6 @@ useEffect(()=>{
     );
     const querySnapshot = await getDocs(q);
       querySnapshot.forEach((d) => {
-        console.log(d.data().id)
         const cityRef = doc(db, 'chat', (d.data().id).toString());
         updateDoc(cityRef, {
            lida: "false"
