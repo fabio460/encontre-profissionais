@@ -128,13 +128,13 @@ export default function MenuItensWeb() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+        <MenuItem onClick={getIdUsers}>
             <Avatar src={UserLoggedApi?.imagemPerfil} sx={{ width: 40, height: 40}}>
               {UserLoggedApi && initialsAvatar(UserLoggedApi?.nome)}
             </Avatar>
             {userLogged ?  UserLoggedApi?.nome : "Usuario"}
         </MenuItem>
-        {userLogged && <MenuItem onClick={getIdUsers}>
+        {userLogged && <MenuItem >
           <Avatar /> Minha conta
         </MenuItem>}
         <Divider />

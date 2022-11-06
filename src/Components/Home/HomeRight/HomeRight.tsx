@@ -63,22 +63,25 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
 
   return (
     <div>
-      {/* <div className='homeRightButtonReturn'>
-        <IconButton onClick={voltar} ><ArrowBackIosNew color='primary'/></IconButton>
-      </div> */}
       { users._id ?  
       
          <div className='homeRightContainer' >
             <div className='homeRightHeader' style={{background:colorsLayout,color:colorTextAbbBar}}>
               <div className='btnReturMensage'>
-                 {userLogged && <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white'}}/></IconButton>}
+                 {userLogged && 
+                   userLogged.email !== users.email &&
+                   <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white'}}/></IconButton>
+                  }
               </div>
               <div className='btnReturMensageMobile' style={{justifyContent:'space-between',width:'100%'}}>
                   <div >
                     <IconButton onClick={voltar}><ArrowBackIosNew sx={{color:'white',margin:'10px 0px 0px -10px'}}/></IconButton>
                   </div>
                   <div  style={{display:'flex',justifyContent:'flex-end'}}>
-                    {userLogged && <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white',margin:'10px -8px 0px auto'}}/></IconButton>}
+                    {userLogged &&
+                      userLogged.email !== users.email && 
+                      <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white',margin:'10px -8px 0px auto'}}/></IconButton>
+                    }
                   </div>
               </div>
               <h1 className='homeRightTitle'>{users.nome}</h1>
@@ -101,36 +104,37 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
                     </div>
                   }
                   <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
-                    {userLogged ?
-                       <Button variant='outlined' onClick={()=>setVisibleChat(false)}>mensagem</Button>:
-                       <div>
-                       <Button variant="outlined" onClick={handleClickOpen}>
-                       mensagem
-                       </Button>
-                       <Dialog
-                         open={open}
-                         onClose={handleClose}
-                         aria-labelledby="alert-dialog-title"
-                         aria-describedby="alert-dialog-description"
-                       >
-                         <DialogTitle id="alert-dialog-title">
-                           {"Ops!!!  Voçe não esta logado!"}
-                         </DialogTitle>
-                         <DialogContent>
-                           <DialogContentText id="alert-dialog-description">
-                              Você precisa estar logado para enviar mensagens
-                           </DialogContentText>
-                         </DialogContent>
-                         <DialogActions>
-                           <Button onClick={()=>navigate('/login')}>Login</Button>
-                           <Button onClick={handleClose} autoFocus>
-                             Fechar
-                           </Button>
-                         </DialogActions>
-                       </Dialog>
+                    {userLogged  ?
+                      userLogged.email !== users.email &&
+                      <Button variant='outlined' onClick={()=>setVisibleChat(false)}>mensagem</Button>:
+                      <div>
+                        <Button variant="outlined" onClick={handleClickOpen} >
+                            mensagem
+                        </Button>
+                        <Dialog
+                          open={open}
+                          onClose={handleClose}
+                          aria-labelledby="alert-dialog-title"
+                          aria-describedby="alert-dialog-description"
+                        >
+                          <DialogTitle id="alert-dialog-title">
+                            {"Ops!!!  Voçe não esta logado!"}
+                          </DialogTitle>
+                          <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                                Você precisa estar logado para enviar mensagens
+                            </DialogContentText>
+                          </DialogContent>
+                          <DialogActions>
+                            <Button onClick={()=>navigate('/login')}>Login</Button>
+                            <Button onClick={handleClose} autoFocus>
+                              Fechar
+                            </Button>
+                          </DialogActions>
+                        </Dialog>
                      </div>
                     }
-                    <Avatar><ChatIcon/></Avatar>
+                    {userLogged.email !== users.email && <Avatar><ChatIcon/></Avatar>}
                   </div>
               </div>
               

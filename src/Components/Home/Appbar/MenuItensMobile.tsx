@@ -121,15 +121,16 @@ export default function MenuItensMobile() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={getIdUsers}>
             <Avatar src={UserLoggedApi?.imagemPerfil} sx={{ width: 40, height: 40,bgcolor:colorsLayout  }}>
               {userLogged && initialsAvatar(UserLoggedApi.nome)}
             </Avatar>
             {userLogged ?  UserLoggedApi?.nome : "Usuario"}
         </MenuItem>
-        {userLogged && <MenuItem onClick={getIdUsers}>
-          <Avatar /> Minha conta
-        </MenuItem>}
+        {userLogged && 
+          <MenuItem >
+            <Avatar /> Minha conta
+          </MenuItem>}
         <Divider />
         <MenuItem>
           <ListItemIcon>
