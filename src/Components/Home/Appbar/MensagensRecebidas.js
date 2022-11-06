@@ -106,11 +106,7 @@ export default function MensagensRecebidas({marginLeft,Close}) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-    
-        
         {mensagensRecebidas.map((elem,key)=>{
-  
-           
             return <div>
                 <MenuItem onClick={()=> getUserMensage(elem.emailEmissor)}>
                     <ListItemIcon>
