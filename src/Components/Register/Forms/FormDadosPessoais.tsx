@@ -82,7 +82,7 @@ export default function FormDadosPessoais({
         <TextField
             value={Senha}
             id="outlined-basic" 
-            label="nome"
+            label="senha"
             variant="outlined"
             onChange={(e)=>setSenha(e.target.value)}
             type='password'
@@ -92,7 +92,7 @@ export default function FormDadosPessoais({
         <TextField
             value={ConfirSenha}
             id="outlined-basic" 
-            label="senha"
+            label="confirmar senha"
             variant="outlined"
             onChange={(e)=>setConfirSenha(e.target.value)}
             type='password'
