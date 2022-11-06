@@ -104,6 +104,7 @@ export default function UsersListNearToYou() {
         }
       }
    }
+   const inputVisible = useSelector((state)=>state.AppBarVisibleReducer.inputVisible)
   return (
     <div>
         {loading ? 
@@ -111,7 +112,7 @@ export default function UsersListNearToYou() {
               <CircularProgress />
             </Box>:
             <div>
-                <FormControl sx={{width:'100%',display:'flex',justifyContent:"center"}}>
+              {inputVisible &&  <FormControl sx={{width:'100%',display:'flex',justifyContent:"center"}}>
                   <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       defaultValue="female"
@@ -127,7 +128,7 @@ export default function UsersListNearToYou() {
                       {list.length > 15 && <FormControlLabel value={'15'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>15</div>} />}
                       </div>
                   </RadioGroup>
-                </FormControl>
+                </FormControl>}
                 { filterPages.length > 0 ? 
                     <div>
                       {filterPages.map((elem,key)=>{

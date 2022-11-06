@@ -26,12 +26,21 @@ export default function AppBarInputSearch() {
       payload:{inputVisible:false}
     })
   }
+  const inputBaseStyle ={  
+    flex: 1,
+    color:'white',
+    width:"75%",
+    m:"20px",
+    "@media (max-width:750px)":{
+      m:inputVisible && "0px 20px",
+    }  
+  }
   return (
     <div>
         <Paper sx={{boxShadow:'none',bgcolor:colorsLayout}}>
      
             <InputBase
-                sx={{  flex: 1,color:'white',width:"75%",m:"20px" }}
+                sx={inputBaseStyle}
                 placeholder="Encontre usuarios ..."
                 inputProps={{ 'aria-label': 'search google maps' }}
                 value={Search}
