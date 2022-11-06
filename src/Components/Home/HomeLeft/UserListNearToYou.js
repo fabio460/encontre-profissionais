@@ -123,7 +123,7 @@ export default function UsersListNearToYou() {
                     onChange={handleChangeRadio}
                   >
                       <div style={{display:'flex',justifyContent:'flex-end',alignItems:'center',marginLeft:"9px"}}>
-                      {list.length > 10 && <FormLabel id="demo-radio-buttons-group-label" sx={{width:"100%"}}>Intervalo da lista</FormLabel>}
+                      {list.length > 10 && <FormLabel id="demo-radio-buttons-group-label" sx={{width:"100%"}}></FormLabel>}
                       {list.length > 10 && <FormControlLabel value={'5'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>5</div>} />}
                       {list.length > 10 && <FormControlLabel value={'10'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>10</div>} />}
                       {list.length > 15 && <FormControlLabel value={'15'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>15</div>} />}
