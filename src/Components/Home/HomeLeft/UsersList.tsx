@@ -90,8 +90,12 @@ export default function UsersList() {
       }
     }
  }
-
-  
+ interface inputTypeVisible{
+  AppBarVisibleReducer:{
+    inputVisible:boolean
+  }
+}
+ const inputVisible = useSelector((state:inputTypeVisible)=>state.AppBarVisibleReducer.inputVisible)
   return (
     <div>
         {loading ?
@@ -101,7 +105,7 @@ export default function UsersList() {
             <div>
               <FormControl sx={{width:'100%',display:'flex',justifyContent:"center"}}>
                 
-                <RadioGroup
+              { inputVisible && <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue="female"
                     name="radio-buttons-group"
@@ -116,7 +120,7 @@ export default function UsersList() {
                       {list.length > 10 && <FormControlLabel value={'10'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>10</div>} />}
                       {list.length > 15 && <FormControlLabel value={'15'} control={<Radio size='small'/>} label={<div style={{marginLeft:'-7px'}}>15</div>} />}
                     </div>
-                </RadioGroup>
+                </RadioGroup>}
               </FormControl>
               { filterPages.length > 0 ? 
                     <div>

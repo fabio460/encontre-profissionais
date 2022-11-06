@@ -104,6 +104,7 @@ export default function UsersListNearToYou() {
         }
       }
    }
+
    const inputVisible = useSelector((state)=>state.AppBarVisibleReducer.inputVisible)
   return (
     <div>
