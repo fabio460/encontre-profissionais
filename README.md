@@ -23,3 +23,4 @@
 ![alt text](./public/loginSenha.PNG)
 ### Após logado, o usuário consegue visualizar os profissionais que moram no seu bairro, ver os seus dados e conversar com ele através do chat. Notificações chegam quando algum profissional (ou cliente), envia uma mensagem. Também é possível alterar dados do usuário, trocar a foto de perfil e excluir a conta. No campo de busca, é possível pesquisar por profissionais por nome ou profissão
 ![alt text](./public/chat.PNG)
+![alt text](./public/notifi.PNG)
