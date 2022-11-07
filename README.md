@@ -4,7 +4,7 @@
 
 
 #                                                 Finalidade
-## O sistema tem como objetivo aproximar os profissionais que fazem "bicos" às pessoas que necessitam. Exemplo: se você precisar de um pintor, e só fazer a busca, encontrar um que more no seu bairro e marcar o serviço.
+## O sistema tem como objetivo aproximar os profissionais que fazem "bicos" às pessoas que necessitam. Exemplo: se você precisar de um pintor, é só fazer a busca, encontrar um que more no seu bairro e marcar o serviço.
 
 
 #                                                 Tecnologias 
