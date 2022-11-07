@@ -1,4 +1,4 @@
-![alt text](./public//site.PNG)
+![alt text](./public/site.PNG)
 
 ### link https://encontre-profissionais.vercel.app/
 
