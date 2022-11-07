@@ -66,8 +66,9 @@ export default function MensagensRecebidas({marginLeft,Close}) {
           >
         
             <Badge badgeContent={mensagensRecebidas.length} color="error">
-               <NotificationsNoneIcon color="action" />
-           </Badge>
+               <NotificationsNoneIcon color="action" /> 
+            </Badge>
+            <div className='notifications'>Notificações</div>
           </IconButton>
         </Tooltip>
       </Box>

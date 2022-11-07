@@ -34,7 +34,19 @@
     display: flex;
     justify-content: space-between;
 }
+.notifications{
+    display: none;
+}
 @media (max-width:750px) {
+    .notifications{
+        text-align: start;
+        display: block;
+        margin-left: 16px;
+        color: rgb(52, 52, 52);
+        font-size: medium;
+        width: 150px;
+        
+    }
     .homeAppBarWeb{
         display: none;
     }

@@ -133,7 +133,7 @@ export default function MenuItensMobile() {
           <ListItemIcon>
              <MensagensRecebidas marginLeft={-3} Close={handleClose}/>
           </ListItemIcon>
-          Notificações
+          
         </MenuItem>
         <MenuItem onClick={()=>navigate('/register')}>
           <ListItemIcon>
