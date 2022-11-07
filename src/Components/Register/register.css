@@ -26,7 +26,7 @@
 .visibleError{
     display: block;
 }
-#validName{
+.validName{
     display:'none';
     color:'red';
     margin-left:'5px';

@@ -138,10 +138,12 @@ export default function Register() {
         validaCep(Cep)
     }, [Cep])
 
-    function alertNameNull() {
-        alert('campos senha esta nulo')
-        document.getElementById('validName')?.classList.add('visibleError')
-    }
+    const [validName, setvalidName] = useState(true)
+    const [validEmail, setvalidEmail] = useState(true)
+    const [validSenha, setvalidSenha] = useState(true)
+    const [validSenhaNaoConfere, setvalidSenhaNaoConfere] = useState(true)
+    const [validCep, setvalidCep] = useState(true)
+    let emailValido = Email.search(/^[a-z]+(@){1}[a-z]+(.com)(.br)*$/)
     return (
         <div className='registerBody'>
             
@@ -165,6 +167,10 @@ export default function Register() {
                             setConfirSenha={setConfirSenha}  
                             setImagemPerfil={setImagemPerfil}
                             ImagemPerfil={ImagemPerfil}
+                            validName={validName}
+                            validEmail={validEmail}
+                            validSenha={validSenha}
+                            validSenhaNaoConfere={validSenhaNaoConfere}
                         />
                     </div>
                    
@@ -174,22 +180,25 @@ export default function Register() {
                         </div>
                         <Button variant="outlined" onClick={()=>{
                             if (Nome !== '') {
-                               if (Email !== '') {
-                                 if (Senha !== '' && ConfirSenha !== '') {
+                               if (Email !== '' && emailValido === 0) {
+                                 if (Senha !== '') {
                                     if (Senha === ConfirSenha) {
                                         setKey(2) 
+                                        setvalidSenhaNaoConfere(true)
                                     } else {
-                                        alert('senhas não conferem')
+                                        setvalidSenhaNaoConfere(false)
                                     }
+                                    setvalidSenha(true)
                                  } else {
-                                    
-                                    alertNameNull()
+                                    setvalidSenha(false)
                                  }
+                                 setvalidEmail(true)
                                } else {
-                                 alert('email invalido')
+                                 setvalidEmail(false)
                                }
+                               setvalidName(true)
                             }else{
-                                alert('o campo nome não pode ser nulo')
+                                setvalidName(false)
                             }
                             }}>proximo
                         </Button>
@@ -207,7 +216,7 @@ export default function Register() {
                                 Rua={Rua}
                                 Logradouro={Logradouro}
                                 Complemento={Complemento}
-
+                                CepInvalid={CepInvalid}
                                 setCep={setCep}
                                 setEstado={setEstado}
                                 setCidade={setCidade}
@@ -224,8 +233,9 @@ export default function Register() {
                                 setTimeout(() => {
                                     if (Cep !== '' &&  !CepInvalid ){
                                         setKey(3) 
+                                        setvalidCep(true)
                                     } else{
-                                        alert('cep invalido')
+                                        setvalidCep(false)
                                     }
                                 }, 200);
                                 }}>proximo

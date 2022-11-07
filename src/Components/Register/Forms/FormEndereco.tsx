@@ -12,7 +12,7 @@ interface tepeForm{
     Rua:string,
     Logradouro:string,
     Complemento:string,
-
+    CepInvalid:boolean,
     setCep:FunctionStringCallback,
     setEstado:FunctionStringCallback,
     setCidade:FunctionStringCallback,
@@ -36,6 +36,7 @@ export default function FormEndereco({
     setLogradouro,
     setRua,
     setComplemento,
+    CepInvalid
 }:tepeForm) {
  
 
@@ -51,7 +52,9 @@ export default function FormEndereco({
             type='text'
             sx={{margin:'5px 0px',color:'white',width:'100%'}} 
             size='small'
+            error={CepInvalid && true}
         />
+        {CepInvalid && <div style={{color:'#d32f2f',marginLeft:'20px'}}>cep inválido</div>}
         <TextField
             value={Estado}
             id="outlined-basic" 

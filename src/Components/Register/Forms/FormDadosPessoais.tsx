@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, IconButton } from '@mui/material';
 import { colorsLayout, initialsAvatar } from '../../../utils';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
+
 interface typeObj{
     Nome:string,
     Email:string,
@@ -14,7 +15,11 @@ interface typeObj{
     setSenha:any,
     setConfirSenha:any,
     setImagemPerfil:any,
-    ImagemPerfil:any
+    ImagemPerfil:any,
+    validName:boolean,
+    validSenhaNaoConfere:boolean,
+    validEmail:boolean,
+    validSenha:boolean
 }
 export default function FormDadosPessoais({
     Nome,
@@ -26,7 +31,11 @@ export default function FormDadosPessoais({
     setSenha,
     setConfirSenha,
     setImagemPerfil,
-    ImagemPerfil
+    ImagemPerfil,
+    validName,
+    validSenha,
+    validEmail,
+    validSenhaNaoConfere
     }:typeObj) {
 
     
@@ -66,8 +75,9 @@ export default function FormDadosPessoais({
             type='text'
             sx={{margin:'5px 0px',color:'white',width:'100%'}} 
             size='small'
+            error={!validName && true}
         />
-        <div id='validName' style={{}}>compo nulo</div>
+        {!validName && <div style={{color:'#d32f2f',marginLeft:'20px'}}>Insira seu nome</div>}
         <TextField
             value={Email}
             id="outlined-basic" 
@@ -77,8 +87,9 @@ export default function FormDadosPessoais({
             type='email'
             sx={{margin:'5px 0px',color:'white',width:'100%'}} 
             size='small'
+            error={!validEmail && true}
         />
-
+        {!validEmail && <div style={{color:'#d32f2f',marginLeft:'20px'}}>email inválido. ex: nome@gmail.com </div>}
         <TextField
             value={Senha}
             id="outlined-basic" 
@@ -88,7 +99,9 @@ export default function FormDadosPessoais({
             type='password'
             sx={{margin:'5px 0px',color:'white',width:'100%'}} 
             size='small'
+            error={!validSenha && true}
         />
+         {!validSenha && <div style={{color:'#d32f2f',marginLeft:'20px'}}>Senha inválida</div>}
         <TextField
             value={ConfirSenha}
             id="outlined-basic" 
@@ -98,8 +111,9 @@ export default function FormDadosPessoais({
             type='password'
             sx={{margin:'5px 0px',color:'white',width:'100%'}} 
             size='small'
+            error={!validSenhaNaoConfere && true}
         />
-       
+        {!validSenhaNaoConfere && <div style={{color:'#d32f2f',marginLeft:'20px'}}>Senhas não conferem</div>}
     </div>
   )
 }
