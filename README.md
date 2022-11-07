@@ -1,4 +1,4 @@
-![alt text](./public/site.png)
+![alt text](./public/home.PNG)
 
 ### link https://encontre-profissionais.vercel.app/
 
@@ -17,6 +17,9 @@
 #                                               Funcionalidades
 
 ### O sistema permite o usuário entrar na pagina sem estar logado mas com restrições 
+![alt text](./public/site.png)
+![alt text](./public/validacao.PNG)
 ### O sistema permite o usuário fazer cadastro com ou sem imagem de perfil, com somente alguma das validações por praticidade, login e as suas validações. Após logado, o usuário consegue visualizar os profissionais que moram no seu bairro
-
+![alt text](./public/loginSenha.PNG)
 ### Após logado, o usuário consegue visualizar os profissionais que moram no seu bairro, ver os seus dados e conversar com ele através do chat. Notificações chegam quando algum profissional (ou cliente), envia uma mensagem. Também é possível alterar dados do usuário, trocar a foto de perfil e excluir a conta. No campo de busca, é possível pesquisar por profissionais por nome ou profissão
+![alt text](./public/chat.PNG)
