@@ -33,7 +33,7 @@
   
 }
 .SwipeableViews{
-
+   box-sizing: border-box;
 }
 .TabPainel{
    overflow-y: hidden;

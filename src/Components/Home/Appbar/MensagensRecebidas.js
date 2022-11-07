@@ -54,7 +54,7 @@ export default function MensagensRecebidas({marginLeft,Close}) {
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center',marginLeft }}>
    
-        <Tooltip title="Voçê tem mensagens recebidas" >
+        <Tooltip title={mensagensRecebidas.length > 0 ? `Voçê tem ${mensagensRecebidas.length} mensagen(s) não lidas` : "não ha mensagens novas"} >
           <IconButton
             onClick={handleClick}
             size="small"
@@ -65,7 +65,7 @@ export default function MensagensRecebidas({marginLeft,Close}) {
 
           >
         
-            <Badge badgeContent={mensagensRecebidas.length} color="primary">
+            <Badge badgeContent={mensagensRecebidas.length} color="error">
                <NotificationsNoneIcon color="action" />
            </Badge>
           </IconButton>

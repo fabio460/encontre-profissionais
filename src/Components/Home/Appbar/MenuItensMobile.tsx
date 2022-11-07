@@ -73,7 +73,7 @@ export default function MenuItensMobile() {
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
       
-        <Tooltip title="Account settings">
+        <Tooltip title={UserLoggedApi.nome ? UserLoggedApi.nome : "usuario deslogado"}>
           <IconButton
             onClick={handleClick}
             size="small"
