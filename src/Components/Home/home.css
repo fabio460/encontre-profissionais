@@ -37,9 +37,11 @@
 }
 .TabPainel{
    overflow-y: hidden;
+  
 }
 .MuiBox-root .css-hpgf8j{
-   height: calc(100vh - 252px);
+   height: calc(100vh - 260px);
+   
    overflow-y: scroll;
 }
 .MuiBox-root .css-hpgf8j::-webkit-scrollbar{
@@ -171,7 +173,7 @@
       overflow-y: visible;
    }
    .MuiBox-root .css-hpgf8j::-webkit-scrollbar{
-      width: 2px;
+      width: 5px;
     }
     .MuiBox-root .css-hpgf8j::-webkit-scrollbar-thumb{
        background-color: rgb(151, 203, 203);
