@@ -23,6 +23,15 @@
 .formsHeader{
     margin-bottom: 25px;
 }
+.visibleError{
+    display: block;
+}
+#validName{
+    display:'none';
+    color:'red';
+    margin-left:'5px';
+    margin-bottom:'10px';
+}
 @media (max-width:750px) {
     .registerBody{
         grid-template-columns: 1fr;

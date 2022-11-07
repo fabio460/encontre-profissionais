@@ -119,6 +119,7 @@ export default function HomeLeft() {
     boxShadow:'none',
     color:'white',
     transitions:'0.5s',
+    
     "@media (max-width:750px)":{
       display:inputVisible ? "block" : 'none',
       transitions:'0.5s',
@@ -128,8 +129,10 @@ export default function HomeLeft() {
 
   const TabPanelStyle = {
     height:'calc(100vh - 252px)',
+   
     "@media (max-width:750px)":{
       height:!inputVisible && 'calc(100vh - 52px)',
+      
     }
   }
   return (
@@ -159,7 +162,7 @@ export default function HomeLeft() {
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
-        
+        className='SwipeableViews'
       >
         <TabPanel value={value} index={0} dir={theme.direction}
             className='TabPainel'

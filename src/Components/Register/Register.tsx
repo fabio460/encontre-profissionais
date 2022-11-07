@@ -137,6 +137,11 @@ export default function Register() {
     useEffect(() => {
         validaCep(Cep)
     }, [Cep])
+
+    function alertNameNull() {
+        alert('campos senha esta nulo')
+        document.getElementById('validName')?.classList.add('visibleError')
+    }
     return (
         <div className='registerBody'>
             
@@ -177,13 +182,14 @@ export default function Register() {
                                         alert('senhas não conferem')
                                     }
                                  } else {
-                                    alert('campos senha esta nulo')
+                                    
+                                    alertNameNull()
                                  }
                                } else {
                                  alert('email invalido')
                                }
                             }else{
-                                alert('nome nulo')
+                                alert('o campo nome não pode ser nulo')
                             }
                             }}>proximo
                         </Button>

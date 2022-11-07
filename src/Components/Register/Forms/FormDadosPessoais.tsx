@@ -67,7 +67,7 @@ export default function FormDadosPessoais({
             sx={{margin:'5px 0px',color:'white',width:'100%'}} 
             size='small'
         />
-        <div id='validName' style={{display:'none',color:'red',marginLeft:'5px',marginBottom:'10px'}}>compo nulo</div>
+        <div id='validName' style={{}}>compo nulo</div>
         <TextField
             value={Email}
             id="outlined-basic" 

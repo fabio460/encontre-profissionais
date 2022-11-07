@@ -18,7 +18,6 @@
 .homeLeft{
    width: 600px;
    margin: 20px 10px 20px 20px;
-   
 }
 
 .homeRight{
@@ -33,15 +32,22 @@
    width: 100%;
   
 }
-.css-19kzrtu{
-   
+.SwipeableViews{
 
 }
-.css-19kzrtu::-webkit-scrollbar{
-  width: 5px;
+.TabPainel{
+   overflow-y: hidden;
 }
-.css-19kzrtu::-webkit-scrollbar-thumb{
-   background-color: aqua;
+.MuiBox-root .css-hpgf8j{
+   height: calc(100vh - 252px);
+   overflow-y: scroll;
+}
+.MuiBox-root .css-hpgf8j::-webkit-scrollbar{
+  width: 10px;
+}
+.MuiBox-root .css-hpgf8j::-webkit-scrollbar-thumb{
+   background-color: rgb(151, 203, 203);
+   border-radius: 5px;
 }
 
 .ListItens{
@@ -161,6 +167,16 @@
 }
 
 @media (max-width:750px) {
+   .TabPainel{
+      overflow-y: visible;
+   }
+   .MuiBox-root .css-hpgf8j::-webkit-scrollbar{
+      width: 2px;
+    }
+    .MuiBox-root .css-hpgf8j::-webkit-scrollbar-thumb{
+       background-color: rgb(151, 203, 203);
+       border-radius: 5px;
+    }
    .btnReturMensage{
       display: none;
    }
