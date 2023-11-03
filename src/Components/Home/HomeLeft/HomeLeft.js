@@ -128,7 +128,7 @@ export default function HomeLeft() {
   }
 
   const TabPanelStyle = {
-    height:'calc(100vh - 252px)',
+    height:'100%',
    
     "@media (max-width:750px)":{
       height:!inputVisible && 'calc(100vh - 52px)',

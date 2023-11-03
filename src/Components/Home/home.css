@@ -1,13 +1,13 @@
 .home{
-    height: 100vh ;
+    min-height: 100vh ;
     background-color: rgba(0, 0, 0, 0.05);
     padding-top: 0px;
 }
 
 .homeMain{
-    height: calc(100vh - 80px);
-    display: flex;
     
+    display: flex;
+   
 }
 .AppBar{
       
@@ -18,14 +18,34 @@
 .homeLeft{
    width: 600px;
    margin: 20px 10px 20px 20px;
+   max-height: 530px;
+   overflow-y: scroll;
+}
+.homeLeft::-webkit-scrollbar{
+   width: 8px;
+   
+}
+.homeLeft::-webkit-scrollbar-thumb{
+   background-color: rgb(196, 195, 195);
+   height: 200px;
+   border-radius: 5px;
 }
 
 .homeRight{
    width: 100%;
    margin: 20px 20px 20px 10px;
    border-radius: 5px;
-   background-color: white;
+   max-height: 530px;
+   overflow-y: scroll;
+}
+.homeRight::-webkit-scrollbar{
+   width: 8px;
    
+}
+.homeRight::-webkit-scrollbar-thumb{
+   background-color: rgb(196, 195, 195);
+   height: 200px;
+   border-radius: 5px;
 }
 .homeRightContainer{
    box-sizing: border-box;
@@ -40,8 +60,7 @@
   
 }
 .MuiBox-root .css-hpgf8j{
-   height: calc(100vh - 260px);
-   
+   min-height: calc(100vh - 260px);
    overflow-y: scroll;
 }
 .MuiBox-root .css-hpgf8j::-webkit-scrollbar{

@@ -14,7 +14,7 @@
 .chatBody{    
     margin-bottom: 15px;
     overflow-y: scroll;
-    max-height: 430px;
+    max-height: 350px;
     padding: 10px;
     transform: rotateX(180deg);
    

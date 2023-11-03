@@ -150,8 +150,7 @@ useEffect(()=>{
     if(event.code === "Enter" || event.code === "NumpadEnter"){
       setChat()
     }
-  }
-
+  } 
   return (
     <div style={{display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100%',boxSizing:'border-box'}}>
       <div className='appBarChat'>
