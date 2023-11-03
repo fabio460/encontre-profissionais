@@ -45,6 +45,7 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
       }
     })
   }
+
   var userLogged:listType = JSON.parse(localStorage.getItem('userLogged')||'null') 
   const users = useSelector<any,listType>(state=>state.FunctionsRedcer.getUsuariosReducer)
   const tamAvatar = "150px"
@@ -63,13 +64,13 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
 
   return (
     <div>
-      { users._id ?  
+      { users?._id ?  
       
          <div className='homeRightContainer' >
             <div className='homeRightHeader' style={{background:colorsLayout,color:colorTextAbbBar}}>
               <div className='btnReturMensage'>
                  {userLogged && 
-                   userLogged.email !== users.email &&
+                   userLogged?.email !== users?.email &&
                    <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white'}}/></IconButton>
                   }
               </div>
@@ -79,7 +80,7 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
                   </div>
                   <div  style={{display:'flex',justifyContent:'flex-end'}}>
                     {userLogged &&
-                      userLogged.email !== users.email && 
+                      userLogged?.email !== users?.email && 
                       <IconButton onClick={()=>setVisibleChat(false)}><ArrowForwardIosIcon sx={{color:'white',margin:'10px -8px 0px auto'}}/></IconButton>
                     }
                   </div>
@@ -95,7 +96,7 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
               <div className='homeRightItems'>
                   <PersonIcon sx={{width:tamAvatar2,height:tamAvatar2, color:colorsLayout}}/>
                   <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
-                    {users.email}
+                    {users?.email}
                     <Avatar><EmailIcon/></Avatar>
                   </div>
                   {users.telefone && <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
@@ -105,7 +106,7 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
                   }
                   <div style={{marginBottom:"7px",display:'flex',alignItems:"center",justifyContent:"space-between",width:"100%"}}> 
                     {userLogged  ?
-                      userLogged.email !== users.email &&
+                      userLogged?.email !== users?.email &&
                       <Button variant='outlined' onClick={()=>setVisibleChat(false)}>mensagem</Button>:
                       <div>
                         <Button variant="outlined" onClick={handleClickOpen} >
@@ -134,7 +135,7 @@ export default function HomeRight({setVisibleChat}:typeFunction) {
                         </Dialog>
                      </div>
                     }
-                    {userLogged.email !== users.email && <Avatar><ChatIcon/></Avatar>}
+                    {userLogged?.email !== users?.email && <Avatar><ChatIcon/></Avatar>}
                   </div>
               </div>
               
